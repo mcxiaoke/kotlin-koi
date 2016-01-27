@@ -11,7 +11,7 @@ import com.mcxiaoke.next.ui.dialog.v4.ProgressDialogFragment
  */
 
 
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     val app: MainApp
         get() = application as MainApp
@@ -20,7 +20,7 @@ open class BaseActivity : AppCompatActivity() {
         get() = this
 }
 
-open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
     protected var mProgressDialog: ProgressDialogFragment? = null
 
     protected val app: MainApp
