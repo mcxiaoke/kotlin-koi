@@ -2,6 +2,7 @@ package com.mcxiaoke.koi.samples
 
 import android.os.Bundle
 import com.mcxiaoke.koi.log.lv
+import com.mcxiaoke.koi.tests.CoreTests
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -16,6 +17,11 @@ class MainActivity : BaseActivity() {
         lv("onCreate()")
         setContentView(R.layout.activity_main)
         iconView.setImageResource(R.drawable.ic_launcher)
+        runAllTests()
+    }
+
+    fun runAllTests() {
+        CoreTests().runAllTests()
     }
 
 }
