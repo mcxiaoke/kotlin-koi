@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi
+package com.mcxiaoke.koi.core
 
 import android.os.Handler
 import android.os.HandlerThread
@@ -41,6 +41,10 @@ inline fun runnable(crossinline action: () -> Unit): Runnable {
 
 fun runOnMainThread(action: () -> Unit) {
     mainHandler.post(action)
+}
+
+fun runOnMainThreadDelay(action: () -> Unit, delayInMillis: Long) {
+    mainHandler.postDelayed(action, delayInMillis)
 }
 
 fun async(action: () -> Unit, executor: ExecutorService): Future<out Any?> {

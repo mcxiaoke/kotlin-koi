@@ -4,6 +4,9 @@
 package com.mcxiaoke.koi
 
 import android.util.Base64
+import com.mcxiaoke.koi.core.isTrue
+import com.mcxiaoke.koi.core.notEmpty
+import com.mcxiaoke.koi.core.notNull
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException

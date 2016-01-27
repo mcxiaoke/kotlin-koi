@@ -118,14 +118,8 @@ fun File?.copyTo(destFile: File) {
 
 @Throws(IOException::class)
 fun File.isSymlink(): Boolean {
-    var f: File?
-    if (this.parent == null) {
-        f = this
-    } else {
-        val canonicalDir = this.parentFile.canonicalFile
-        f = File(canonicalDir, this.name)
-    }
-
+    val f = if (this.parent == null) this else
+        File(this.parentFile.canonicalFile, this.name)
     return f.canonicalFile != f.absoluteFile
 }
 

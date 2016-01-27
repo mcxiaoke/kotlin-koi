@@ -1,11 +1,12 @@
 buildscript {
 
     repositories {
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
     }
 }
@@ -14,23 +15,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 dependencies {
-    kapt "com.jakewharton:butterknife:7.0.1"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    kapt 'com.jakewharton:butterknife:7.0.1'
 
-//    compile 'io.reactivex:rxandroid:1.1.0'
-//    compile 'io.reactivex:rxjava:1.1.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.3.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-design:0.3.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.3.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-kotlin:0.3.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-support-v4-kotlin:0.3.0'
-//    compile 'com.trello:rxlifecycle:0.4.0'
-//    compile 'com.trello:rxlifecycle-components:0.4.0'
-//    compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.1'
-//    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.5.1'
-//    compile 'com.jakewharton.rxrelay:rxrelay:1.0.0'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4584'
 
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
@@ -50,9 +37,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     compile 'com.mcxiaoke.xbus:bus:1.0.2'
-
-    compile fileTree(dir: 'libs', include: '*.jar')
     compile project(':core')
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 kapt {
@@ -64,20 +50,18 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
+        versionName project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        applicationId "com.mcxiaoke.koi.samples"
     }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+//        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
-
     lintOptions {
-        quiet true
         abortOnError false
+        htmlReport true
     }
-
 }
-

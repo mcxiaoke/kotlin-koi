@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.ext
+package com.mcxiaoke.koi.log
 
 /**
  * User: mcxiaoke
