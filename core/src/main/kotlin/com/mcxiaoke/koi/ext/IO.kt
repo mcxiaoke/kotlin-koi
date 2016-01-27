@@ -118,7 +118,7 @@ fun File?.copyTo(destFile: File) {
 
 @Throws(IOException::class)
 fun File.isSymlink(): Boolean {
-    var f: File? = null
+    var f: File?
     if (this.parent == null) {
         f = this
     } else {
@@ -155,24 +155,24 @@ fun File.totalSize(): Long {
 }
 
 fun File.clean(): Boolean {
-    val f = this
-    if (!f.exists()) {
+    val file = this
+    if (!file.exists()) {
         return true
     }
-    if (f.isFile) {
-        return f.delete()
+    if (file.isFile) {
+        return file.delete()
     }
-    if (!f.isDirectory) {
+    if (!file.isDirectory) {
         return false
     }
-    for (f in f.listFiles()) {
+    for (f in file.listFiles()) {
         if (f.isFile) {
             f.delete()
         } else if (f.isDirectory) {
             f.clean()
         }
     }
-    return f.delete()
+    return file.delete()
 }
 
 

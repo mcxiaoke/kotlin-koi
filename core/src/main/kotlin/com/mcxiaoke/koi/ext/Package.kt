@@ -57,7 +57,7 @@ fun Context.enableComponent(clazz: Class<*>) {
     return setComponentState(clazz, true)
 }
 
-fun Context.disableComponent(context: Context, clazz: Class<*>) {
+fun Context.disableComponent(clazz: Class<*>) {
     return setComponentState(clazz, false)
 }
 
@@ -86,7 +86,7 @@ fun Context.getPackageSignature(): Signature? {
     return info?.signatures?.get(0)
 }
 
-fun Context.getSignature(context: Context): String {
+fun Context.getSignature(): String {
     val signature = this.getPackageSignature()
     if (signature != null) {
         try {

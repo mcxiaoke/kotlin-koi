@@ -28,6 +28,9 @@ val executor: ExecutorService by lazy {
     Executors.newCachedThreadPool()
 }
 
+fun <T> T?.or(default: T): T = if (this == null) default else this
+fun <T> T?.or(compute: () -> T): T = if (this == null) compute() else this
+
 inline fun <T> callable(crossinline action: () -> T?): Callable<out T> {
     return Callable<T> { action() }
 }
@@ -56,14 +59,14 @@ inline fun <T> async(crossinline action: () -> T?,
     }
 }
 
-inline fun doIf(condition: Boolean, action: () -> Unit) {
-    condition ?: action()
+inline fun doIf(condition: Boolean?, action: () -> Unit) {
+    if (condition == true) action()
 }
 
 inline fun doIf(condition: () -> Boolean?, action: () -> Unit) {
-    condition() ?: action()
+    if (condition() == true ) action()
 }
 
 inline fun doIf(any: Any?, action: () -> Unit) {
-    any ?: action()
+    if (any == true ) action()
 }

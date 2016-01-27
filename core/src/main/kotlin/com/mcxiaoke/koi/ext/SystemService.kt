@@ -195,5 +195,6 @@ fun Context.windowService(): WindowManager =
  *  Private functions
  * -----------------------------------------------------------------------------
  */
+@Suppress("UNCHECKED_CAST")
 private fun <T> Context.systemService(serviceName: String): T =
         this.getSystemService(serviceName) as T

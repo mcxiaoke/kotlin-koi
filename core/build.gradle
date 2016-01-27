@@ -2,10 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 dependencies {
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4584'
-    compile 'com.android.support:support-v4:22.2.1'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "com.android.support:support-v4:22.2.1"
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:1.10.19"
 }
 
 android {

@@ -65,10 +65,10 @@ private object Helper {
 }
 
 object AES {
-    val ITERATION_COUNT_DEFAULT = 100
-    val KEY_SIZE_DEFAULT = 256
-    val IV_SIZE_DEFAULT = 16
-    val KEY_AES_SPEC = "AES/CBC/PKCS7Padding"
+    const val ITERATION_COUNT_DEFAULT = 100
+    const val KEY_SIZE_DEFAULT = 256
+    const val IV_SIZE_DEFAULT = 16
+    const val AES_CBC_PKCS7 = "AES/CBC/PKCS7Padding"
 
     @JvmOverloads fun encrypt(text: String,
                               password: String = simplePassword,
@@ -132,27 +132,25 @@ object AES {
         }
 
         try {
-            var keySpec: SecretKeySpec? = null
-            var cipher: Cipher? = null
-            if (iv != null) {
-                keySpec = SecretKeySpec(key, KEY_AES_SPEC)
-                cipher = Cipher.getInstance(KEY_AES_SPEC)
-                cipher!!.init(Cipher.ENCRYPT_MODE, keySpec,
-                        IvParameterSpec(iv))
-            } else
-            // if(iv == null)
-            {
-                keySpec = SecretKeySpec(key, KEY_AES_SPEC)
-                cipher = Cipher.getInstance(KEY_AES_SPEC)
-                cipher!!.init(Cipher.ENCRYPT_MODE, keySpec)
+            var keySpec: SecretKeySpec?
+            var cipher: Cipher?
+            when (iv) {
+                null -> {
+                    keySpec = SecretKeySpec(key, AES_CBC_PKCS7)
+                    cipher = Cipher.getInstance(AES_CBC_PKCS7)
+                    cipher.init(Cipher.ENCRYPT_MODE, keySpec)
+                }
+                else -> {
+                    keySpec = SecretKeySpec(key, AES_CBC_PKCS7)
+                    cipher = Cipher.getInstance(AES_CBC_PKCS7)
+                    cipher.init(Cipher.ENCRYPT_MODE, keySpec,
+                            IvParameterSpec(iv))
+                }
             }
-
             return cipher.doFinal(original)
         } catch (e: Exception) {
-            e.printStackTrace()
+            return null
         }
-
-        return null
     }
 
     /**
@@ -176,21 +174,21 @@ object AES {
         }
 
         try {
-            var keySpec: SecretKeySpec? = null
-            var cipher: Cipher? = null
-            if (iv != null) {
-                keySpec = SecretKeySpec(key, "AES/CBC/PKCS7Padding")// AES/ECB/PKCS5Padding
-                cipher = Cipher.getInstance("AES/CBC/PKCS7Padding")
-                cipher!!.init(Cipher.DECRYPT_MODE, keySpec,
-                        IvParameterSpec(iv))
-            } else
-            // if(iv == null)
-            {
-                keySpec = SecretKeySpec(key, "AES/ECB/PKCS7Padding")
-                cipher = Cipher.getInstance("AES/ECB/PKCS7Padding")
-                cipher!!.init(Cipher.DECRYPT_MODE, keySpec)
+            var keySpec: SecretKeySpec?
+            var cipher: Cipher?
+            when (iv) {
+                null -> {
+                    keySpec = SecretKeySpec(key, AES_CBC_PKCS7)
+                    cipher = Cipher.getInstance(AES_CBC_PKCS7)
+                    cipher.init(Cipher.DECRYPT_MODE, keySpec)
+                }
+                else -> {
+                    keySpec = SecretKeySpec(key, AES_CBC_PKCS7)// AES/ECB/PKCS5Padding
+                    cipher = Cipher.getInstance(AES_CBC_PKCS7)
+                    cipher.init(Cipher.DECRYPT_MODE, keySpec,
+                            IvParameterSpec(iv))
+                }
             }
-
             return cipher.doFinal(encrypted)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -208,7 +206,7 @@ object AES {
             val keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
             val keyBytes = keyFactory.generateSecret(keySpec).encoded
             val key = SecretKeySpec(keyBytes, "AES")
-            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+            val cipher = Cipher.getInstance(AES_CBC_PKCS7)
             val ivParams = IvParameterSpec(iv)
             cipher.init(mode, key, ivParams)
             return cipher.doFinal(data)
