@@ -1,0 +1,37 @@
+ext {
+    compileSdkVersion = 22
+    buildToolsVersion = "22.0.1"
+    minSdkVersion = 15
+    targetSdkVersion = 22
+    // kotlinVersion = "1.0.0-beta-4584"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0-beta-4584'
+    }
+}
+
+allprojects {
+
+    group project.GROUP
+    version project.VERSION_NAME
+
+
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+}
+
