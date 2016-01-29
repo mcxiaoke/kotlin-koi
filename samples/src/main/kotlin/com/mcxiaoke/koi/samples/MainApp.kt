@@ -1,6 +1,8 @@
 package com.mcxiaoke.koi.samples
 
 import android.app.Application
+import android.util.Log
+import com.mcxiaoke.koi.log.KoiLogger
 import kotlin.properties.Delegates
 
 /**
@@ -14,10 +16,11 @@ class MainApp : Application() {
         var app: MainApp by Delegates.notNull<MainApp>()
     }
 
-    var splashShowed = false
+    var splashShowed = true
 
     override fun onCreate() {
         super.onCreate()
+        KoiLogger.LOG_LEVEL = Log.VERBOSE
         app = this
     }
 }

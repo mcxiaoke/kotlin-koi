@@ -2,7 +2,7 @@ package com.mcxiaoke.koi.tests
 
 import android.os.Looper
 import com.mcxiaoke.koi.core.*
-import com.mcxiaoke.koi.log.lv
+import com.mcxiaoke.koi.log.logv
 
 /**
  * User: mcxiaoke
@@ -19,18 +19,18 @@ class CoreTests {
 
     fun testHandler() {
         mainHandler.post {
-            lv("mainHandler Thread:${Thread.currentThread()}")
+            logv("mainHandler Thread:${Thread.currentThread()}")
             isTrue(isMainThread())
         }
-        lv("handler looper:${asyncHandler.looper}")
-        lv("main looper:${Looper.getMainLooper()}")
+        logv("handler looper:${asyncHandler.looper}")
+        logv("main looper:${Looper.getMainLooper()}")
         mainHandler.post {
-            lv("mainHandler.post Thread:${Thread.currentThread()}")
+            logv("mainHandler.post Thread:${Thread.currentThread()}")
             isTrue(isMainThread())
         }
         val now = System.currentTimeMillis()
         mainHandler.postDelayed({
-            lv("mainHandler.postDelayed Thread:${Thread.currentThread()}")
+            logv("mainHandler.postDelayed Thread:${Thread.currentThread()}")
             isTrue(isMainThread())
             isTrue((System.currentTimeMillis() - now) > 2500)
         }, 3000)
@@ -39,27 +39,27 @@ class CoreTests {
 
     fun testAsync() {
         async2 {
-            lv("async Thread:${Thread.currentThread()}")
+            logv("async Thread:${Thread.currentThread()}")
             isFalse(isMainThread())
         }
         async2({
-            lv("async action Thread:${Thread.currentThread()}")
+            logv("async action Thread:${Thread.currentThread()}")
             isFalse(isMainThread())
             Thread.sleep(2000)
         }, {
-            lv("async callback Thread:${Thread.currentThread()}")
+            logv("async callback Thread:${Thread.currentThread()}")
             isTrue(isMainThread())
         })
     }
 
     fun testCondition() {
-        doIf(true, { lv("true") })
-        doIf(false, { lv("false") })
-        doIf(null, { lv("null") })
+        doIf(true, { logv("true") })
+        doIf(false, { logv("false") })
+        doIf(null, { logv("null") })
 
-        doIf({ true }, { lv("{true}") })
-        doIf({ false }, { lv("{false}") })
-        doIf({ null }, { lv("{null}") })
+        doIf({ true }, { logv("{true}") })
+        doIf({ false }, { logv("{false}") })
+        doIf({ null }, { logv("{null}") })
 
         val a: String? = null
         val b: String? = "Hello"
@@ -68,12 +68,12 @@ class CoreTests {
         val e = null
         val f = false
 
-        doIf(a, { lv("a") })
-        doIf(b, { lv("b") })
-        doIf(c, { lv("c") })
-        doIf(d, { lv("d") })
-        doIf(e, { lv("e") })
-        doIf(f, { lv("f") })
+        doIf(a, { logv("a") })
+        doIf(b, { logv("b") })
+        doIf(c, { logv("c") })
+        doIf(d, { logv("d") })
+        doIf(e, { logv("e") })
+        doIf(f, { logv("f") })
 
     }
 }
