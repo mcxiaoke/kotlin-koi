@@ -38,11 +38,11 @@ class CoreTests {
     }
 
     fun testAsync() {
-        async() {
+        async2 {
             lv("async Thread:${Thread.currentThread()}")
             isFalse(isMainThread())
         }
-        async({
+        async2({
             lv("async action Thread:${Thread.currentThread()}")
             isFalse(isMainThread())
             Thread.sleep(2000)

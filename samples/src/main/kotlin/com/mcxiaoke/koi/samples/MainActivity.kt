@@ -1,6 +1,8 @@
 package com.mcxiaoke.koi.samples
 
 import android.os.Bundle
+import com.mcxiaoke.koi.core.async2
+import com.mcxiaoke.koi.core.mainThreadDelay
 import com.mcxiaoke.koi.log.lv
 import com.mcxiaoke.koi.tests.CoreTests
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +24,12 @@ class MainActivity : BaseActivity() {
 
     fun runAllTests() {
         CoreTests().runAllTests()
+    }
+
+    fun demo() {
+        mainThreadDelay(5000) {
+
+        }
     }
 
 }

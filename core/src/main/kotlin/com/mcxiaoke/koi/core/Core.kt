@@ -1,88 +1,98 @@
 package com.mcxiaoke.koi.core
 
+import android.app.Fragment
+import android.content.Context
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import com.mcxiaoke.koi.utils.newCachedThreadPool
-import java.util.concurrent.Callable
+import java.lang.ref.WeakReference
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
+import android.support.v4.app.Fragment as SupportFragment
 
 /**
  * User: mcxiaoke
  * Date: 16/1/26
  * Time: 17:07
  */
-private object Holder {
+object CoreExecutor {
+    private var thread: HandlerThread? = null
+
+
+    fun quitHandlerThread() {
+        thread?.quit()
+    }
+
     val mainHandler: Handler by lazy {
         Handler(Looper.getMainLooper())
     }
 
     val asyncHandler: Handler by lazy {
-        val t: HandlerThread = HandlerThread("global")
-        t.start()
-        Handler(t.looper)
+        thread = HandlerThread("global")
+        thread?.start()
+        Handler(thread?.looper)
     }
 
     val executor: ExecutorService by lazy {
         newCachedThreadPool("core")
     }
+
+    fun execute(task: () -> Unit): Future<Unit> {
+        return executor.submit<Unit> { task() }
+    }
+
+    fun <T> submit(task: () -> T): Future<T> {
+        return executor.submit(task)
+    }
 }
 
-val mainHandler by lazy {
-    Holder.mainHandler
-}
-val asyncHandler by lazy {
-    Holder.asyncHandler
+val mainHandler = CoreExecutor.mainHandler
+val asyncHandler = CoreExecutor.asyncHandler
+val asyncExecutor = CoreExecutor.executor
+
+fun isMainThread(): Boolean {
+    return Looper.myLooper() == Looper.getMainLooper()
 }
 
-val executor by lazy {
-    Holder.executor
-}
+fun mainThread(action: () -> Unit): Boolean = mainHandler.post(action)
 
-inline fun <T> callable(crossinline action: () -> T?): Callable<out T> {
-    return Callable<T> { action() }
-}
-
-inline fun runnable(crossinline action: () -> Unit): Runnable {
-    return Runnable { action() }
-}
-
-fun delay(action: () -> Unit, delayMillis: Long = 0): Boolean
+fun mainThreadDelay(delayMillis: Long = 0, action: () -> Unit): Boolean
         = mainHandler.postDelayed(action, delayMillis)
 
-fun async(action: () -> Unit, executor: ExecutorService): Future<Unit> {
-    return executor.submit<Unit>(action)
+fun async2(action: () -> Unit, executor: ExecutorService): Future<Unit> {
+    return CoreExecutor.submit<Unit>(action)
 }
 
-fun async(action: () -> Unit): Future<Unit> = executor.submit<Unit>(action)
+fun async2(action: () -> Unit): Future<Unit> = CoreExecutor.submit<Unit>(action)
 
-inline fun <T> async(crossinline action: () -> T?,
-                     crossinline callback: (result: T?) -> Unit): Future<*> {
-    return executor.submit {
+inline fun <T> async2(crossinline action: () -> T?,
+                      crossinline callback: (result: T?) -> Unit): Future<Unit> {
+    return CoreExecutor.submit<Unit> {
         val ret = action()
-        mainHandler.post {
+        mainThread {
             callback(ret)
         }
     }
 }
 
-inline fun <T> async(crossinline action: () -> T?,
-                     crossinline success: (result: T?) -> Unit,
-                     crossinline failure: (error: Throwable) -> Unit): Future<*> {
-    return executor.submit {
+inline fun <T> async2(crossinline action: () -> T?,
+                      crossinline success: (result: T?) -> Unit,
+                      crossinline failure: (error: Throwable) -> Unit): Future<*> {
+    return asyncExecutor.submit {
         try {
             val ret = action()
-            mainHandler.post {
+            mainThread {
                 success(ret)
             }
         } catch(e: Exception) {
-            mainHandler.post {
+            mainThread {
                 failure(e)
             }
         }
     }
 }
+
 
 inline fun doIf(condition: Boolean?, action: () -> Unit) {
     if (condition == true) action()
