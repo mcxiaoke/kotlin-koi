@@ -18,7 +18,7 @@ class CounterThreadFactory(name: String?) : ThreadFactory {
 
     override fun newThread(r: Runnable): Thread {
         val thread = Thread(r)
-        thread.name = name + "-thread #" + count++
+        thread.name = name + "-thread-" + count++
         return thread
     }
 }
