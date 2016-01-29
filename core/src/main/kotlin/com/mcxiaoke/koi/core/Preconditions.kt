@@ -32,7 +32,3 @@ fun isFalse(condition: Boolean, message: String? = "argument is true") {
         throw IllegalArgumentException(message)
     }
 }
-
-fun isMainThread(): Boolean {
-    return Looper.myLooper() == Looper.getMainLooper()
-}
