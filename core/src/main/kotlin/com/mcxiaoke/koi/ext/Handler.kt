@@ -8,13 +8,17 @@ import android.os.Message
  * Date: 16/1/26
  * Time: 17:58
  */
-fun Handler.post(action: () -> Unit): Boolean = post(Runnable(action))
+inline fun <T : Any> Handler.atNow(crossinline action: () -> T): Boolean
+        = post({ action() })
 
-fun Handler.atFrontOfQueue(action: () -> Unit): Boolean = postAtFrontOfQueue(Runnable(action))
+inline fun <T : Any> Handler.atFront(crossinline action: () -> T): Boolean
+        = postAtFrontOfQueue({ action() })
 
-fun Handler.atTime(uptimeMillis: Long, action: () -> Unit): Boolean = postAtTime(Runnable(action), uptimeMillis)
+inline fun <T : Any> Handler.atTime(uptimeMillis: Long, crossinline action: () -> T): Boolean
+        = postAtTime({ action() }, uptimeMillis)
 
-fun Handler.delayed(delayMillis: Long, action: () -> Unit): Boolean = postDelayed(Runnable(action), delayMillis)
+inline fun <T : Any> Handler.delayed(delayMillis: Long, crossinline action: () -> T): Boolean
+        = postDelayed({ action() }, delayMillis)
 
 fun handler(handleMessage: (Message) -> Boolean): Handler {
     return Handler { p -> if (p == null) false else handleMessage(p) }

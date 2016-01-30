@@ -55,20 +55,17 @@ private fun inflateView(context: Context, layoutResId: Int, parent: ViewGroup?,
         LayoutInflater.from(context).inflate(layoutResId, parent, attachToRoot)
 
 fun View.hideSoftKeyboard() {
-    val imm = this.context.inputMethodManager()
-    imm?.hideSoftInputFromWindow(this.windowToken, 0)
+    context.getInputMethodManager().hideSoftInputFromWindow(this.windowToken, 0)
 }
 
 fun EditText.showSoftKeyboard() {
     if (this.requestFocus()) {
-        val imm = this.context.inputMethodManager()
-        imm?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+        context.getInputMethodManager().showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
     }
 }
 
 fun EditText.toggleSoftInput() {
     if (this.requestFocus()) {
-        val imm = this.context.inputMethodManager()
-        imm?.toggleSoftInput(0, 0)
+        context.getInputMethodManager().toggleSoftInput(0, 0)
     }
 }

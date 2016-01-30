@@ -4,9 +4,9 @@
 package com.mcxiaoke.koi
 
 import android.util.Base64
-import com.mcxiaoke.koi.core.isTrue
-import com.mcxiaoke.koi.core.notEmpty
-import com.mcxiaoke.koi.core.notNull
+import com.mcxiaoke.koi.core.throwIfFalse
+import com.mcxiaoke.koi.core.throwIfEmpty
+import com.mcxiaoke.koi.core.throwIfNull
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -258,11 +258,11 @@ class AESCrypto {
 
     private fun initialize(password: String, salt: ByteArray, iv: ByteArray,
                            keySize: Int, iterCount: Int) {
-        notEmpty(password, "password must not be null or empty")
-        notNull(salt, "salt must bot be null")
-        notNull(iv, "iv must not be null")
-        isTrue(keySize >= KEY_SIZE_MIN && keySize <= KEY_SIZE_MAX, "keySize must between $KEY_SIZE_MIN and $KEY_SIZE_MAX")
-        isTrue(iterCount >= ITERATION_COUNT_MIN && iterCount <= ITERATION_COUNT_MAX,
+        throwIfEmpty(password, "password must not be null or empty")
+        throwIfNull(salt, "salt must bot be null")
+        throwIfNull(iv, "iv must not be null")
+        throwIfFalse(keySize >= KEY_SIZE_MIN && keySize <= KEY_SIZE_MAX, "keySize must between $KEY_SIZE_MIN and $KEY_SIZE_MAX")
+        throwIfFalse(iterCount >= ITERATION_COUNT_MIN && iterCount <= ITERATION_COUNT_MAX,
                 "iterCount must between $ITERATION_COUNT_MIN and $ITERATION_COUNT_MAX")
         this.password = password
         this.salt = salt

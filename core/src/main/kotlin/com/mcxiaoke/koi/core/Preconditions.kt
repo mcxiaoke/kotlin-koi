@@ -1,7 +1,5 @@
 package com.mcxiaoke.koi.core
 
-import android.os.Looper
-
 /**
  * User: mcxiaoke
  * Date: 16/1/26
@@ -9,25 +7,31 @@ import android.os.Looper
  */
 
 
-fun <T : Any> notNull(obj: T?, message: String? = "argument is null") {
+fun <T : Any> throwIfNull(obj: T?, message: String? = "object is null") {
     if (obj == null) {
         throw IllegalArgumentException(message)
     }
 }
 
-fun notEmpty(obj: String?, message: String? = "argument is empty") {
+fun throwIfEmpty(obj: String?, message: String? = "string is null or empty") {
     if (obj == null || obj.length == 0) {
         throw IllegalArgumentException(message)
     }
 }
 
-fun isTrue(condition: Boolean, message: String? = "argument is false") {
+fun <T : Any> throwIfEmpty(obj: Collection<T>?, message: String? = "collection is null or empty") {
+    if (obj == null || obj.size == 0) {
+        throw IllegalArgumentException(message)
+    }
+}
+
+fun throwIfFalse(condition: Boolean, message: String? = "condition is false") {
     if (!condition) {
         throw IllegalArgumentException(message)
     }
 }
 
-fun isFalse(condition: Boolean, message: String? = "argument is true") {
+fun throwIfTrue(condition: Boolean, message: String? = "condition is true") {
     if (condition) {
         throw IllegalArgumentException(message)
     }

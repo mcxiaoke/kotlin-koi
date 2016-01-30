@@ -29,7 +29,7 @@ fun Context.isAppInstalled(packageName: String): Boolean {
 }
 
 fun Context.isMainProcess(): Boolean {
-    val am: ActivityManager = this.activityManager()
+    val am: ActivityManager = this.getActivityManager()
     val processes = am.runningAppProcesses
     val mainProcessName = this.packageName
     val myPid = android.os.Process.myPid()

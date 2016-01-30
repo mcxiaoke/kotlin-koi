@@ -26,7 +26,7 @@ object CoreExecutor {
     }
 
     val asyncHandler: Handler by lazy {
-        thread = HandlerThread("global")
+        thread = HandlerThread("koi-global")
         thread?.start()
         Handler(thread?.looper)
     }
@@ -44,20 +44,18 @@ object CoreExecutor {
     }
 }
 
-val mainHandler = CoreExecutor.mainHandler
-val asyncHandler = CoreExecutor.asyncHandler
-val asyncExecutor = CoreExecutor.executor
-
+val koiMainHandler = CoreExecutor.mainHandler
+val koiAsyncHandler = CoreExecutor.asyncHandler
+val koiExecutor = CoreExecutor.executor
 
 fun threadName(): String = Thread.currentThread().name
 
 fun isMainThread(): Boolean = Looper.myLooper() == Looper.getMainLooper()
 
-fun mainThread(action: () -> Unit): Boolean = mainHandler.post(action)
+fun mainThread(action: () -> Unit): Boolean = CoreExecutor.mainHandler.post(action)
 
 fun mainThreadDelay(delayMillis: Long = 0, action: () -> Unit): Boolean
-        = mainHandler.postDelayed(action, delayMillis)
-
+        = CoreExecutor.mainHandler.postDelayed(action, delayMillis)
 
 inline fun doIf(condition: Boolean?, action: () -> Unit) {
     if (condition == true) action()

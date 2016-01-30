@@ -16,7 +16,7 @@ enum class NetworkType {
 fun Context.networkTypeName(): String {
     var result = "(No Network)"
     try {
-        val cm = this.connectivityManager()
+        val cm = this.getConnectivityManager()
         val info = cm.activeNetworkInfo
         if (info == null || !info.isConnectedOrConnecting) {
             return result
@@ -31,12 +31,12 @@ fun Context.networkTypeName(): String {
 }
 
 fun Context.networkOperator(): String {
-    val tm = this.telephonyManager()
+    val tm = this.getTelephonyManager()
     return tm.networkOperator
 }
 
 fun Context.networkType(): NetworkType {
-    val cm = this.connectivityManager()
+    val cm = this.getConnectivityManager()
     val info = cm.activeNetworkInfo
     if (info == null || !info.isConnectedOrConnecting) {
         return NetworkType.NONE
@@ -60,7 +60,7 @@ fun Context.isMobile(): Boolean {
 }
 
 fun Context.isConnected(): Boolean {
-    val cm = this.connectivityManager()
+    val cm = this.getConnectivityManager()
     val info = cm.activeNetworkInfo
     return info != null && info.isConnectedOrConnecting
 }
