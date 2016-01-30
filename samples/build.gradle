@@ -23,6 +23,8 @@ dependencies {
     compile 'org.jetbrains.anko:anko-sdk15:0.8' // sdk19, sdk21, sdk23 are also available
     compile 'org.jetbrains.anko:anko-support-v4:0.8' // In case you need support-v4 bindings
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.8' // For appcompat-v7 bindings
+    compile 'com.github.salomonbrys.kotson:kotson:1.7.0' //kotlin gson binding
+    compile 'io.reactivex:rxkotlin:0.30.1' // rx kotlin
 
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'

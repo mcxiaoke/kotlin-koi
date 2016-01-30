@@ -18,21 +18,21 @@ class CoreTests {
     }
 
     fun testHandler() {
-        mainHandler.post {
+        koiMainHandler.post {
             logv("mainHandler Thread:${Thread.currentThread()}")
-            isTrue(isMainThread())
+            throwIfFalse(isMainThread())
         }
-        logv("handler looper:${asyncHandler.looper}")
+        logv("handler looper:${koiAsyncHandler.looper}")
         logv("main looper:${Looper.getMainLooper()}")
-        mainHandler.post {
+        koiMainHandler.post {
             logv("mainHandler.post Thread:${Thread.currentThread()}")
-            isTrue(isMainThread())
+            throwIfFalse(isMainThread())
         }
         val now = System.currentTimeMillis()
-        mainHandler.postDelayed({
+        koiMainHandler.postDelayed({
             logv("mainHandler.postDelayed Thread:${Thread.currentThread()}")
-            isTrue(isMainThread())
-            isTrue((System.currentTimeMillis() - now) > 2500)
+            throwIfFalse(isMainThread())
+            throwIfFalse((System.currentTimeMillis() - now) > 2500)
         }, 3000)
 
     }
@@ -40,15 +40,15 @@ class CoreTests {
     fun testAsync() {
         async2 {
             logv("async Thread:${Thread.currentThread()}")
-            isFalse(isMainThread())
+            throwIfTrue(isMainThread())
         }
         async2({
             logv("async action Thread:${Thread.currentThread()}")
-            isFalse(isMainThread())
+            throwIfTrue(isMainThread())
             Thread.sleep(2000)
         }, {
             logv("async callback Thread:${Thread.currentThread()}")
-            isTrue(isMainThread())
+            throwIfFalse(isMainThread())
         })
     }
 

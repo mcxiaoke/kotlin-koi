@@ -1,7 +1,7 @@
 package com.mcxiaoke.koi.samples
 
 import android.os.Bundle
-import com.mcxiaoke.koi.core.mainHandler
+import com.mcxiaoke.koi.core.koiMainHandler
 import com.mcxiaoke.koi.ext.startActivity
 import com.mcxiaoke.koi.log.logv
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -21,7 +21,7 @@ class SplashActivity : BaseActivity() {
         } else {
             setContentView(R.layout.activity_splash)
             label.text = "Hello, World!"
-            mainHandler.postDelayed({ showMain() }, 3000)
+            koiMainHandler.postDelayed({ showMain() }, 3000)
         }
     }
 
