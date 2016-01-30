@@ -54,7 +54,7 @@ fun isMainThread(): Boolean = Looper.myLooper() == Looper.getMainLooper()
 
 fun mainThread(action: () -> Unit): Boolean = CoreExecutor.mainHandler.post(action)
 
-fun mainThreadDelay(delayMillis: Long = 0, action: () -> Unit): Boolean
+fun mainThreadDelay(delayMillis: Long, action: () -> Unit): Boolean
         = CoreExecutor.mainHandler.postDelayed(action, delayMillis)
 
 inline fun doIf(condition: Boolean?, action: () -> Unit) {
