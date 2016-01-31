@@ -2,9 +2,8 @@ package com.mcxiaoke.koi.tests
 
 import com.mcxiaoke.koi.assert.throwIfFalse
 import com.mcxiaoke.koi.assert.throwIfTrue
-import com.mcxiaoke.koi.async.async2
+import com.mcxiaoke.koi.async.asyncUnsafe
 import com.mcxiaoke.koi.async.isMainThread
-import com.mcxiaoke.koi.core.*
 import com.mcxiaoke.koi.doIf
 import com.mcxiaoke.koi.log.logv
 
@@ -25,15 +24,15 @@ class CoreTests {
     }
 
     fun testAsync() {
-        async2() {
+        asyncUnsafe {
             logv(tag, "async Thread:${Thread.currentThread()}")
             throwIfTrue(isMainThread())
         }
-        async2({
-            logv(tag, "async action Thread:${Thread.currentThread()}")
+        asyncUnsafe({
             throwIfTrue(isMainThread())
+            logv(tag, "async action Thread:${Thread.currentThread()}")
             Thread.sleep(2000)
-        }, {
+        }, { r, e ->
             logv(tag, "async callback Thread:${Thread.currentThread()}")
             throwIfFalse(isMainThread())
         })

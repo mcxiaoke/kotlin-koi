@@ -1,5 +1,4 @@
 buildscript {
-    ext.kotlin_version = '1.0.0-beta-4589'
 
     repositories {
         mavenCentral()
@@ -9,7 +8,6 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -19,17 +17,18 @@ apply plugin: 'kotlin-android'
 dependencies {
     kapt 'com.jakewharton:butterknife:7.0.1'
 
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4584'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile 'org.jetbrains.anko:anko-sdk15:0.8' // sdk19, sdk21, sdk23 are also available
     compile 'org.jetbrains.anko:anko-support-v4:0.8' // In case you need support-v4 bindings
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.8' // For appcompat-v7 bindings
     compile 'com.github.salomonbrys.kotson:kotson:1.7.0' //kotlin gson binding
     compile 'io.reactivex:rxkotlin:0.30.1' // rx kotlin
 
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
+    compile "com.android.support:support-v4:$supportVersion"
+    compile "com.android.support:recyclerview-v7:$supportVersion"
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "com.android.support:design:$supportVersion"
+
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.squareup.okhttp:okhttp:2.7.2'
@@ -37,16 +36,15 @@ dependencies {
     compile 'com.mcxiaoke.next:task:1.3.0'
     compile 'com.mcxiaoke.next:core:1.3.0'
     compile 'com.mcxiaoke.next:http:1.3.0'
-    compile('com.mcxiaoke.next:ui:1.3.0') {
-        exclude group: 'com.android.support', module: 'support-v4'
-    }
-    compile('com.mcxiaoke.next:recycler:1.3.0') {
-        exclude group: 'com.android.support', module: 'support-v4'
-    }
+    compile 'com.mcxiaoke.next:ui:1.3.0'
+    compile 'com.mcxiaoke.next:recycler:1.3.0'
     compile 'com.mcxiaoke.xbus:bus:1.0.2'
+
     compile project(':core')
+    compile project(':network')
+    compile project(':ui')
+
     compile fileTree(dir: 'libs', include: '*.jar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 kapt {
@@ -66,13 +64,9 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-//        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
     lintOptions {
         abortOnError false
         htmlReport true
     }
-}
-repositories {
-    mavenCentral()
 }

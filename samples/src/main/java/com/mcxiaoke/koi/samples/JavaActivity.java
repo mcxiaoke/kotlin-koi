@@ -27,21 +27,6 @@ public class JavaActivity extends Activity {
 
     public void testAsync() {
         final Context context = this;
-        AsyncKt.async2(new Function0<String>() {
-                           @Override
-                           public String invoke() {
-                               LogKt.logd(context, "async2 action running");
-                               return "async2(action)";
-                           }
-                       },
-                new Function1<String, Unit>() {
-                    @Override
-                    public Unit invoke(final String s) {
-                        LogKt.logd(context, "async2 action result:" + s);
-                        LogKt.logd(context, "async2 callback");
-                        return Unit.INSTANCE;
-                    }
-                });
         AsyncKt.asyncSafe(this, new Function1<WeakContext<Activity>, String>() {
             @Override
             public String invoke(final WeakContext<Activity> contextWeakContext) {
