@@ -7,6 +7,7 @@ ext {
 
 buildscript {
     ext.kotlinVersion = '1.0.0-beta-4584'
+    ext.supportVersion = '22.2.1'
 
     repositories {
         jcenter()
@@ -20,10 +21,6 @@ buildscript {
 }
 
 allprojects {
-
-    group project.GROUP
-    version project.VERSION_NAME
-
 
     repositories {
         mavenLocal()
