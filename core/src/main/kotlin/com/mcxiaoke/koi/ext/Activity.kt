@@ -1,10 +1,10 @@
 package com.mcxiaoke.koi.ext
 
 import android.app.Activity
+import android.app.Fragment
 import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.res.Configuration
-import android.view.WindowManager
+import android.view.View
+import android.support.v4.app.Fragment as SupportFragment
 
 /**
  * User: mcxiaoke
@@ -12,6 +12,14 @@ import android.view.WindowManager
  * Time: 13:14
  */
 
+
+fun Activity.getActivity(): Activity = this
+
+fun View.getActivity(): Activity = context as Activity
+
+fun Fragment.finish() = activity?.finish()
+
+fun SupportFragment.finish() = activity?.finish()
 
 fun Activity.restart() {
     val intent = this.intent
@@ -22,42 +30,4 @@ fun Activity.restart() {
     this.startActivity(intent)
 }
 
-fun Activity.setFullScreen(fullscreen: Boolean) {
-    if (fullscreen) {
-        this.window.addFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        this.window.clearFlags(
-                WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-    } else {
-        this.window.addFlags(
-                WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-        this.window.clearFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN)
-    }
-}
-
-fun Activity.setPortrait(portrait: Boolean) {
-    if (portrait) {
-        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    } else {
-        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-    }
-}
-
-fun Activity.lockScreen(portrait: Boolean) {
-    if (portrait) {
-        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    } else {
-        if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        }
-        if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        }
-    }
-}
-
-fun Activity.unlockScreen() {
-    this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-}
 

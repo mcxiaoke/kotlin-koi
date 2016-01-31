@@ -1,46 +1,4 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    compile "com.android.support:support-v4:22.2.1"
-    testCompile "junit:junit:4.12"
-    testCompile "org.mockito:mockito-core:1.10.19"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
-
-android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
-    defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
-    }
-
-    lintOptions {
-        quiet true
-        abortOnError false
-    }
-
-}
-
+apply from: '../base.gradle'
 apply from: 'https://github.com/mcxiaoke/gradle-mvn-push/raw/master/gradle-mvn-push.gradle'
-buildscript {
-    ext.kotlin_version = '1.0.0-beta-4589'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-repositories {
-    mavenCentral()
-}
+//apply from: 'https://github.com/mcxiaoke/gradle-mvn-push/raw/master/jar.gradle'
 

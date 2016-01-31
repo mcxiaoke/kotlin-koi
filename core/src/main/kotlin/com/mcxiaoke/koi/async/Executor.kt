@@ -3,7 +3,6 @@ package com.mcxiaoke.koi.async
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
-import com.mcxiaoke.koi.async.newCachedThreadPool
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
@@ -42,11 +41,7 @@ object CoreExecutor {
     }
 }
 
-object Threads{
-
-}
-
-val koiExecutor = CoreExecutor.executor
+fun koiExecutor(): ExecutorService = CoreExecutor.executor
 
 fun threadName(): String = Thread.currentThread().name
 

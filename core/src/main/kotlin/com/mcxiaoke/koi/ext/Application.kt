@@ -13,28 +13,14 @@ import android.support.v4.app.Fragment as SupportFragment
  * Time: 10:30
  */
 
-val Activity.app: Application
-    get() = application
+fun Activity.getApp(): Application = application
 
-val Activity.activity: Activity
-    get() = this
+fun Service.getApp(): Application = application
 
-val Service.app: Application
-    get() = application
+fun View.getApp(): Application = context.applicationContext as Application
 
-val View.app: Application
-    get() = context.applicationContext as Application
+fun Fragment.getApp(): Application = activity.application
 
-val Fragment.app: Application
-    get() = activity.application
+fun SupportFragment.getApp(): Application = activity.application
 
-fun Fragment.finish() {
-    activity?.finish()
-}
 
-val SupportFragment.app: Application
-    get() = activity.application
-
-fun SupportFragment.finish() {
-    activity?.finish()
-}
