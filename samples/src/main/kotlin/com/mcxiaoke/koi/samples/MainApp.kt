@@ -1,8 +1,7 @@
 package com.mcxiaoke.koi.samples
 
-import android.app.Application
-import android.util.Log
-import com.mcxiaoke.koi.log.KoiLogger
+import com.mcxiaoke.koi.KoiConfig
+import com.mcxiaoke.koi.app.KoiApp
 import kotlin.properties.Delegates
 
 /**
@@ -10,7 +9,7 @@ import kotlin.properties.Delegates
  * Date: 16/1/27
  * Time: 16:18
  */
-class MainApp : Application() {
+class MainApp : KoiApp() {
 
     companion object {
         var app: MainApp by Delegates.notNull<MainApp>()
@@ -20,7 +19,7 @@ class MainApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        KoiLogger.LOG_LEVEL = Log.VERBOSE
         app = this
+        KoiConfig.logEnabled = true
     }
 }
