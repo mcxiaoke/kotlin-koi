@@ -9,12 +9,12 @@ package com.mcxiaoke.koi.log
 import android.content.Context
 import android.util.Log
 import com.mcxiaoke.koi.KoiConfig
-import com.mcxiaoke.koi.core.threadName
+import com.mcxiaoke.koi.async.threadName
 
 fun Throwable.stackTraceString(): String = Log.getStackTraceString(this)
 
 private fun logMessageWithThreadName(message: String): String
-        = "$message [T:${threadName()}]"
+        = "$message [thread:${threadName()}]"
 
 fun Context.logv(message: String) {
     logv(javaClass.simpleName, message)

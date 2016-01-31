@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.os.Bundle
 import android.view.WindowManager
 
 /**
@@ -12,6 +11,7 @@ import android.view.WindowManager
  * Date: 16/1/22
  * Time: 13:14
  */
+
 
 fun Activity.restart() {
     val intent = this.intent

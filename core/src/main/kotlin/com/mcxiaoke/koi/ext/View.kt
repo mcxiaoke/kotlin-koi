@@ -3,6 +3,8 @@ package com.mcxiaoke.koi.ext
 import android.app.Activity
 import android.app.Fragment
 import android.content.Context
+import android.content.res.Resources
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,43 +18,31 @@ import android.support.v4.app.Fragment as SupportFragment
  * Time: 17:38
  */
 
-inline fun <reified T : View> View.find(id: Int): T = this.findViewById(id) as T
-
-inline fun <reified T : View> Activity.find(id: Int): T = this.findViewById(id) as T
-
-inline fun <reified T : View> Fragment.find(id: Int): T = this.view.findViewById(id) as T
-
-inline fun <reified T : View> SupportFragment.find(id: Int): T = this.view.findViewById(id) as T
 
 
-fun Context.dpToPx(dp: Int): Int {
-    return (dp * this.resources.displayMetrics.density + 0.5).toInt()
+val View.displayMetrics: DisplayMetrics
+    get() = resources.displayMetrics
+
+
+fun Float.pxToDp(): Int {
+    val metrics = Resources.getSystem().displayMetrics
+    val dp = this / (metrics.densityDpi / 160f)
+    return Math.round(dp)
 }
 
-fun Context.pxToDp(px: Int): Int {
-    return (px / this.resources.displayMetrics.density + 0.5).toInt()
+fun Float.dpToPx(): Int {
+    val metrics = Resources.getSystem().displayMetrics
+    val px = this * (metrics.densityDpi / 160f)
+    return Math.round(px)
 }
 
 fun View.dpToPx(dp: Int): Int {
-    return (dp * this.resources.displayMetrics.density + 0.5).toInt()
+    return (dp * this.displayMetrics.density + 0.5).toInt()
 }
 
 fun View.pxToDp(px: Int): Int {
-    return (px / this.resources.displayMetrics.density + 0.5).toInt()
+    return (px / this.displayMetrics.density + 0.5).toInt()
 }
-
-fun Context.inflateLayout(layoutResId: Int): View =
-        inflateView(this, layoutResId, null, false)
-
-fun Context.inflateLayout(layoutResId: Int, parent: ViewGroup): View =
-        inflateLayout(layoutResId, parent, true)
-
-fun Context.inflateLayout(layoutResId: Int, parent: ViewGroup, attachToRoot: Boolean): View =
-        inflateView(this, layoutResId, parent, attachToRoot)
-
-private fun inflateView(context: Context, layoutResId: Int, parent: ViewGroup?,
-                        attachToRoot: Boolean): View =
-        LayoutInflater.from(context).inflate(layoutResId, parent, attachToRoot)
 
 fun View.hideSoftKeyboard() {
     context.getInputMethodManager().hideSoftInputFromWindow(this.windowToken, 0)
@@ -64,7 +54,7 @@ fun EditText.showSoftKeyboard() {
     }
 }
 
-fun EditText.toggleSoftInput() {
+fun EditText.toggleSoftKeyboard() {
     if (this.requestFocus()) {
         context.getInputMethodManager().toggleSoftInput(0, 0)
     }

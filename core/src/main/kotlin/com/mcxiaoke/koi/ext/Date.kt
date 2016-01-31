@@ -19,11 +19,11 @@ object DateHelper {
     }
 }
 
-fun Date.now(): String {
+fun dateNow(): String {
     return Date().asString()
 }
 
-fun Date.parse(s: String): Date {
+fun dateParse(s: String): Date {
     val position = ParsePosition(0)
     return DateHelper.DF_SIMPLE_FORMAT.get().parse(s, position)
 }

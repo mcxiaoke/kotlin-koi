@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.utils
+package com.mcxiaoke.koi.async
 
 import java.util.concurrent.*
 
@@ -13,7 +13,7 @@ class CounterThreadFactory(name: String?) : ThreadFactory {
     private val name: String
 
     init {
-        this.name = name ?: "A"
+        this.name = name ?: "koi"
     }
 
     override fun newThread(r: Runnable): Thread {

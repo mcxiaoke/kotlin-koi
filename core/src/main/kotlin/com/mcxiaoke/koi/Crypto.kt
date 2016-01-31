@@ -4,9 +4,9 @@
 package com.mcxiaoke.koi
 
 import android.util.Base64
-import com.mcxiaoke.koi.core.throwIfFalse
-import com.mcxiaoke.koi.core.throwIfEmpty
-import com.mcxiaoke.koi.core.throwIfNull
+import com.mcxiaoke.koi.assert.throwIfFalse
+import com.mcxiaoke.koi.assert.throwIfEmpty
+import com.mcxiaoke.koi.assert.throwIfNull
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException

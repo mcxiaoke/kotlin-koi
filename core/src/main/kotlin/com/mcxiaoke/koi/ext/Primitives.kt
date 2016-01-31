@@ -27,14 +27,3 @@ fun ByteArray.hexString(): String {
     return String(hexChars)
 }
 
-fun Float.pxToDp(): Int {
-    val metrics = Resources.getSystem().displayMetrics
-    val dp = this / (metrics.densityDpi / 160f)
-    return Math.round(dp)
-}
-
-fun Float.dpToPx(): Int {
-    val metrics = Resources.getSystem().displayMetrics
-    val px = this * (metrics.densityDpi / 160f)
-    return Math.round(px)
-}

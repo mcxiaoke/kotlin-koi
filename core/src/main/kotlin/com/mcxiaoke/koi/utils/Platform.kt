@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.core
+package com.mcxiaoke.koi.utils
 
 import android.os.Build
 
