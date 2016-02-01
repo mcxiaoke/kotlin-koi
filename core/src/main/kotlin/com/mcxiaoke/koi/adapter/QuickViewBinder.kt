@@ -2,13 +2,10 @@ package com.mcxiaoke.koi.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Paint
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.util.Linkify
 import android.view.View
 import android.widget.*
-import com.mcxiaoke.koi.ext.find
 
 /**
  * User: mcxiaoke
@@ -25,9 +22,7 @@ open class QuickViewBinder constructor(
         view.tag = this
     }
 
-    private inline fun <reified T : View> findView(viewId: Int): T {
-        return view.find(viewId)
-    }
+    inline fun <reified T : View> findView(viewId: Int): T = view.findViewById(viewId) as T
 
     fun setText(viewId: Int, value: String): QuickViewBinder {
         findView<TextView>(viewId).text = value
@@ -84,52 +79,6 @@ open class QuickViewBinder constructor(
         return this
     }
 
-    /** Apply the typeface to the given viewId, and enable subpixel rendering.  */
-    fun setTypeface(viewId: Int, typeface: Typeface): QuickViewBinder {
-        val view = findView<TextView>(viewId)
-        view.typeface = typeface
-        view.paintFlags = view.paintFlags or Paint.SUBPIXEL_TEXT_FLAG
-        return this
-    }
-
-    fun setTypeface(typeface: Typeface, vararg viewIds: Int): QuickViewBinder {
-        for (viewId in viewIds) {
-            val view = findView<TextView>(viewId)
-            view.typeface = typeface
-            view.paintFlags = view.paintFlags or Paint.SUBPIXEL_TEXT_FLAG
-        }
-        return this
-    }
-
-    fun setProgress(viewId: Int, progress: Int): QuickViewBinder {
-        findView<ProgressBar>(viewId).progress = progress
-        return this
-    }
-
-    fun setProgress(viewId: Int, progress: Int, max: Int): QuickViewBinder {
-        val view = findView<ProgressBar>(viewId)
-        view.max = max
-        view.progress = progress
-        return this
-    }
-
-    fun setMax(viewId: Int, max: Int): QuickViewBinder {
-        findView<ProgressBar>(viewId).max = max
-        return this
-    }
-
-    fun setRating(viewId: Int, rating: Float): QuickViewBinder {
-        findView<RatingBar>(viewId).rating = rating
-        return this
-    }
-
-    fun setRating(viewId: Int, rating: Float, max: Int): QuickViewBinder {
-        val view = findView<RatingBar>(viewId)
-        view.max = max
-        view.rating = rating
-        return this
-    }
-
     fun setOnClickListener(viewId: Int,
                            listener: View.OnClickListener): QuickViewBinder {
         findView<View>(viewId).setOnClickListener(listener)
@@ -160,23 +109,6 @@ open class QuickViewBinder constructor(
                                    listener: AdapterView.OnItemLongClickListener)
             : QuickViewBinder {
         findView<AdapterView<Adapter>>(viewId).onItemLongClickListener = listener
-        return this
-    }
-
-    fun setOnItemSelectedClickListener(viewId: Int,
-                                       listener: AdapterView.OnItemSelectedListener)
-            : QuickViewBinder {
-        findView<AdapterView<Adapter>>(viewId).onItemSelectedListener = listener
-        return this
-    }
-
-    fun setTag(viewId: Int, tag: Any): QuickViewBinder {
-        findView<View>(viewId).tag = tag
-        return this
-    }
-
-    fun setTag(viewId: Int, key: Int, tag: Any): QuickViewBinder {
-        findView<View>(viewId).setTag(key, tag)
         return this
     }
 

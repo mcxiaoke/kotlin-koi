@@ -64,22 +64,6 @@ fun Context.inflate(layoutResId: Int, parent: ViewGroup): View =
 fun Context.inflate(layoutResId: Int, parent: ViewGroup, attachToRoot: Boolean): View =
         inflateView(this, layoutResId, parent, attachToRoot)
 
-fun Context.smartCacheDir(): File {
-    if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
-        val aDir = this.externalCacheDir
-        val noMedia = File(this.externalCacheDir, Const.FILENAME_NOMEDIA)
-        if (!noMedia.exists()) {
-            try {
-                noMedia.createNewFile()
-            } catch (ignored: IOException) {
-            }
-        }
-        return aDir
-    } else {
-        return this.cacheDir
-    }
-}
-
 fun Context.hasCamera(): Boolean {
     val pm = this.packageManager
     return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)

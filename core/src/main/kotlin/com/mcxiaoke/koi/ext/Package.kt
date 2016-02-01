@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
 import com.mcxiaoke.koi.HASH
-import com.mcxiaoke.koi.HEX
 import java.io.ByteArrayInputStream
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
@@ -107,7 +106,7 @@ fun Context.dumpSignature(): String {
         val input = ByteArrayInputStream(signatureBytes)
         val cert = certFactory.generateCertificate(input) as X509Certificate
         val chars = signature.toCharsString()
-        val hex = HEX.encodeHex(signatureBytes, false)
+        val hex = HASH.encodeHex(signatureBytes, false)
         val md5 = HASH.md5(signatureBytes)
         val sha1 = HASH.sha1(signatureBytes)
         builder.append("SignName:").append(cert.sigAlgName).append("\n")

@@ -1,5 +1,6 @@
 package com.mcxiaoke.koi.ext
 
+import com.mcxiaoke.koi.Const
 import com.mcxiaoke.koi.Encoding
 import java.io.*
 import java.net.HttpURLConnection
@@ -13,26 +14,12 @@ import java.nio.charset.Charset
  * Time: 14:48
  */
 
-object IOConst {
-    const val LINE_SEPARATOR = "\n"
-    const val FILE_EXTENSION_SEPARATOR = "."
-    const val EOF = -1
-    const val DEFAULT_BUFFER_SIZE = 1024 * 8
-    const val SKIP_BUFFER_SIZE = 2048
-    const val RESERVED_CHARS = "|\\?*<\":>+[]/'"
-
-    fun closeQuietly(closeable: Closeable?) {
-        try {
-            closeable?.close()
-        } catch (ignored: IOException) {
-            // ignore
-        }
-
-    }
-}
-
 fun Closeable?.closeQuietly() {
-    IOConst.closeQuietly(this)
+    try {
+        this?.close()
+    } catch (ignored: IOException) {
+        // ignore
+    }
 }
 
 fun URLConnection.close() {
@@ -79,7 +66,7 @@ fun InputStream.readLines(input: Reader): List<String> {
 @Throws(IOException::class)
 @JvmOverloads fun OutputStream.writeLines(lines: Collection<*>?,
                                           charset: Charset = Charsets.UTF_8,
-                                          lineSeparator: String? = IOConst.LINE_SEPARATOR) {
+                                          lineSeparator: String? = Const.LINE_SEPARATOR) {
     lines?.forEach { line ->
         if (line != null) {
             this.write(line.toString().toByteArray(charset))
@@ -91,7 +78,7 @@ fun InputStream.readLines(input: Reader): List<String> {
 @Throws(IOException::class)
 @JvmOverloads fun File.writeLines(lines: Collection<*>?,
                                   charset: Charset = Charsets.UTF_8,
-                                  lineSeparator: String? = IOConst.LINE_SEPARATOR) {
+                                  lineSeparator: String? = Const.LINE_SEPARATOR) {
     return FileOutputStream(this).writeLines(lines, charset, lineSeparator)
 }
 
@@ -113,38 +100,6 @@ fun File?.copyTo(destFile: File) {
     } finally {
         source?.closeQuietly()
         destination?.closeQuietly()
-    }
-}
-
-@Throws(IOException::class)
-fun File.isSymlink(): Boolean {
-    val f = if (this.parent == null) this else
-        File(this.parentFile.canonicalFile, this.name)
-    return f.canonicalFile != f.absoluteFile
-}
-
-private fun File.sizeOfDirectory(): Long {
-    val files = this.listFiles() ?: return 0L
-    var size: Long = 0
-    for (file in files) {
-        try {
-            if (!this.isSymlink()) {
-                size += file.sizeOfDirectory()
-                if (size < 0) {
-                    break
-                }
-            }
-        } catch (ignored: IOException) {
-        }
-    }
-    return size
-}
-
-fun File.totalSize(): Long {
-    if (this.isDirectory) {
-        return this.sizeOfDirectory()
-    } else {
-        return this.length()
     }
 }
 

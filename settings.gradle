@@ -1,4 +1,5 @@
 include ':core'
+include ':async'
 include ':network'
 include ':ui'
 include ':samples'

@@ -29,6 +29,9 @@ object Encoding {
 object Const {
     const val FILENAME_NOMEDIA = ".nomedia"
     const val HEAP_SIZE_LARGE = 48 * 1024 * 1024
-    val SAFE_FILENAME_PATTERN = Pattern.compile("[\\w%+,./=_-]+")
-    val HEX_DIGITS = "0123456789ABCDEF".toCharArray()
+    const val LINE_SEPARATOR = "\n"
+    const val FILE_EXTENSION_SEPARATOR = "."
+    const val RESERVED_CHARS = "|\\?*<\":>+[]/'"
+    @JvmField val HEX_DIGITS = "0123456789ABCDEF".toCharArray()
+    @JvmField val SAFE_FILENAME_PATTERN = Pattern.compile("[\\w%+,./=_-]+")
 }

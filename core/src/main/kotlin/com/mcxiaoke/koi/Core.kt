@@ -23,6 +23,8 @@ class KoiConfig {
 }
 
 
+fun threadName(): String = Thread.currentThread().name
+
 inline fun doIf(condition: Boolean?, action: () -> Unit) {
     if (condition == true) action()
 }

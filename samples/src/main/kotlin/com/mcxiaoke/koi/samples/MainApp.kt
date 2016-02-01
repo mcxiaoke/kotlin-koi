@@ -1,7 +1,7 @@
 package com.mcxiaoke.koi.samples
 
+import android.app.Application
 import com.mcxiaoke.koi.KoiConfig
-import com.mcxiaoke.koi.app.KoiApp
 import kotlin.properties.Delegates
 
 /**
@@ -9,7 +9,7 @@ import kotlin.properties.Delegates
  * Date: 16/1/27
  * Time: 16:18
  */
-class MainApp : KoiApp() {
+class MainApp : Application() {
 
     companion object {
         var app: MainApp by Delegates.notNull<MainApp>()

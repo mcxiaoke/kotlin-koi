@@ -49,67 +49,11 @@ abstract class ArrayAdapterEx<T>(
     : this(context, objects.toArrayList()) {
     }
 
-    constructor(context: Context, objects: Sequence<T>)
-    : this(context, objects.toArrayList()) {
-    }
-
-    constructor(context: Context, objects: Iterable<T>)
-    : this(context, objects.toArrayList()) {
-    }
-
     constructor(context: Context, objects: Collection<T>)
     : this(context, objects.toArrayList()) {
     }
 
-    fun replaceAll(collection: Collection<T>): ArrayAdapterEx<T> {
-        clear()
-        addAll(collection)
-        return this
-    }
-
-    fun replaceAll(items: Array<T>): ArrayAdapterEx<T> {
-        clear()
-        addAll(items)
-        return this
-    }
-
-    fun replaceAll(items: Iterable<T>): ArrayAdapterEx<T> {
-        clear()
-        addAll(items)
-        return this
-    }
-
-    fun replaceAll(items: Sequence<T>): ArrayAdapterEx<T> {
-        clear()
-        addAll(items)
-        return this
-    }
-
     fun addAll(items: Collection<T>): ArrayAdapterEx<T> {
-        synchronized (lock) {
-            objects.addAll(items)
-        }
-        notifyDataSetChanged()
-        return this
-    }
-
-    fun addAll(items: Array<T>): ArrayAdapterEx<T> {
-        synchronized (lock) {
-            objects.addAll(items)
-        }
-        notifyDataSetChanged()
-        return this
-    }
-
-    fun addAll(items: Iterable<T>): ArrayAdapterEx<T> {
-        synchronized (lock) {
-            objects.addAll(items)
-        }
-        notifyDataSetChanged()
-        return this
-    }
-
-    fun addAll(items: Sequence<T>): ArrayAdapterEx<T> {
         synchronized (lock) {
             objects.addAll(items)
         }
@@ -125,18 +69,6 @@ abstract class ArrayAdapterEx<T>(
         return this
     }
 
-    fun addAll(index: Int, items: Array<T>): ArrayAdapterEx<T> {
-        return addAll(index, items.toList())
-    }
-
-    fun addAll(index: Int, items: Iterable<T>): ArrayAdapterEx<T> {
-        return addAll(index, items.toList())
-    }
-
-    fun addAll(index: Int, items: Sequence<T>): ArrayAdapterEx<T> {
-        return addAll(index, items.toList())
-    }
-
     fun removeAll(items: Collection<T>): Boolean {
         var result = false
         synchronized (lock) {
@@ -144,18 +76,6 @@ abstract class ArrayAdapterEx<T>(
         }
         notifyDataSetChanged()
         return result
-    }
-
-    fun removeAll(items: Array<T>): Boolean {
-        return removeAll(items.asList())
-    }
-
-    fun removeAll(items: Iterable<T>): Boolean {
-        return removeAll(items.toList())
-    }
-
-    fun removeAll(items: Sequence<T>): Boolean {
-        return removeAll(items.toList())
     }
 
     fun clear(): ArrayAdapterEx<T> {
@@ -233,14 +153,6 @@ abstract class ArrayAdapterEx<T>(
         return objects.indexOf(item)
     }
 
-    fun firstItem(): T {
-        return objects.first()
-    }
-
-    fun lastItem(): T {
-        return objects.last()
-    }
-
     fun lastOrNull(): T? {
         return objects.lastOrNull()
     }
@@ -260,7 +172,6 @@ abstract class ArrayAdapterEx<T>(
     override fun getItem(position: Int): T {
         return objects[position]
     }
-
 
     override fun getItemId(position: Int): Long {
         return position.toLong()

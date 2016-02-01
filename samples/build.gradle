@@ -41,6 +41,7 @@ dependencies {
     compile 'com.mcxiaoke.xbus:bus:1.0.2'
 
     compile project(':core')
+    compile project(':async')
     compile project(':network')
     compile project(':ui')
 

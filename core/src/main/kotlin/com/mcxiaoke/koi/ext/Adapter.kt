@@ -26,27 +26,7 @@ fun <T : Any> Activity.quickAdapterOf(
         renderer: ((QuickViewBinder, T) -> Unit))
         : QuickAdapter<T> {
     val adapter = quickAdapterOf(layoutId, renderer)
-    adapter.addAll(items)
-    return adapter
-}
-
-fun <T : Any> Activity.quickAdapterOf(
-        layoutId: Int,
-        items: Iterable<T>,
-        renderer: ((QuickViewBinder, T) -> Unit))
-        : QuickAdapter<T> {
-    val adapter = quickAdapterOf(layoutId, renderer)
-    adapter.addAll(items)
-    return adapter
-}
-
-fun <T : Any> Activity.quickAdapterOf(
-        layoutId: Int,
-        items: Sequence<T>,
-        renderer: ((QuickViewBinder, T) -> Unit))
-        : QuickAdapter<T> {
-    val adapter = quickAdapterOf(layoutId, renderer)
-    adapter.addAll(items)
+    adapter.addAll(items.toList())
     return adapter
 }
 

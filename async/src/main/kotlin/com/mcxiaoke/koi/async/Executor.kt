@@ -22,12 +22,6 @@ object CoreExecutor {
         Handler(Looper.getMainLooper())
     }
 
-    val asyncHandler: Handler by lazy {
-        thread = HandlerThread("koi-global")
-        thread?.start()
-        Handler(thread?.looper)
-    }
-
     val executor: ExecutorService by lazy {
         newCachedThreadPool("koi-core")
     }
@@ -42,7 +36,5 @@ object CoreExecutor {
 }
 
 fun koiExecutor(): ExecutorService = CoreExecutor.executor
-
-fun threadName(): String = Thread.currentThread().name
 
 

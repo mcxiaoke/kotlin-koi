@@ -9,7 +9,7 @@ package com.mcxiaoke.koi.log
 import android.content.Context
 import android.util.Log
 import com.mcxiaoke.koi.KoiConfig
-import com.mcxiaoke.koi.async.threadName
+import com.mcxiaoke.koi.threadName
 
 fun Throwable.stackTraceString(): String = Log.getStackTraceString(this)
 

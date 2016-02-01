@@ -180,7 +180,7 @@ fun String.fileNameWithoutExtension(): String {
     }
 
     var filePath = this
-    val extenPosi = filePath.lastIndexOf(IOConst.FILE_EXTENSION_SEPARATOR)
+    val extenPosi = filePath.lastIndexOf(Const.FILE_EXTENSION_SEPARATOR)
     val filePosi = filePath.lastIndexOf(File.separator)
     if (filePosi == -1) {
         return if (extenPosi == -1) filePath else filePath.substring(0, extenPosi)
@@ -207,53 +207,10 @@ fun String.fileExtension(): String {
         return this
     }
     var filePath = this
-    val extenPosi = filePath.lastIndexOf(IOConst.FILE_EXTENSION_SEPARATOR)
+    val extenPosi = filePath.lastIndexOf(Const.FILE_EXTENSION_SEPARATOR)
     val filePosi = filePath.lastIndexOf(File.separator)
     if (extenPosi == -1) {
         return ""
     }
     return if (filePosi >= extenPosi) "" else filePath.substring(extenPosi + 1)
-}
-
-
-internal object SizeDef {
-    val ONE_KB: Long = 1024
-    val ONE_KB_BI = BigInteger.valueOf(ONE_KB)
-    val ONE_MB_BI = ONE_KB_BI.multiply(ONE_KB_BI)
-    val ONE_GB_BI = ONE_KB_BI.multiply(ONE_MB_BI)
-    val ONE_TB_BI = ONE_KB_BI.multiply(ONE_GB_BI)
-    val ONE_PB_BI = ONE_KB_BI.multiply(ONE_TB_BI)
-    val ONE_EB_BI = ONE_KB_BI.multiply(ONE_PB_BI)
-    val ONE_MB = ONE_KB * ONE_KB
-    val ONE_GB = ONE_KB * ONE_MB
-    val ONE_TB = ONE_KB * ONE_GB
-    val ONE_PB = ONE_KB * ONE_TB
-    val ONE_EB = ONE_KB * ONE_PB
-    val ONE_ZB = BigInteger.valueOf(ONE_KB).multiply(BigInteger.valueOf(ONE_EB))
-    val ONE_YB = ONE_KB_BI.multiply(ONE_ZB)
-}
-
-fun BigInteger.readableSize(): String {
-    val displaySize: String
-    var size = this
-    if (size.divide(SizeDef.ONE_EB_BI).compareTo(BigInteger.ZERO) > 0) {
-        displaySize = size.divide(SizeDef.ONE_EB_BI).toString() + " EB"
-    } else if (size.divide(SizeDef.ONE_PB_BI).compareTo(BigInteger.ZERO) > 0) {
-        displaySize = size.divide(SizeDef.ONE_PB_BI).toString() + " PB"
-    } else if (size.divide(SizeDef.ONE_TB_BI).compareTo(BigInteger.ZERO) > 0) {
-        displaySize = size.divide(SizeDef.ONE_TB_BI).toString() + " TB"
-    } else if (size.divide(SizeDef.ONE_GB_BI).compareTo(BigInteger.ZERO) > 0) {
-        displaySize = size.divide(SizeDef.ONE_GB_BI).toString() + " GB"
-    } else if (size.divide(SizeDef.ONE_MB_BI).compareTo(BigInteger.ZERO) > 0) {
-        displaySize = size.divide(SizeDef.ONE_MB_BI).toString() + " MB"
-    } else if (size.divide(SizeDef.ONE_KB_BI).compareTo(BigInteger.ZERO) > 0) {
-        displaySize = size.divide(SizeDef.ONE_KB_BI).toString() + " KB"
-    } else {
-        displaySize = size.toString() + " bytes"
-    }
-    return displaySize
-}
-
-fun Long.readableSize(): String {
-    return BigInteger.valueOf(this).readableSize()
 }
