@@ -19,6 +19,18 @@ interface Detachable {
 }
 
 class WeakContext<T>(val weakRef: WeakReference<T>) {
+    protected val needCheck: Boolean
+
+    init {
+        val ctx = weakRef.get()
+        needCheck = when (ctx) {
+            is Activity -> true
+            is Fragment -> true
+            is SupportFragment -> true
+            is Detachable -> true
+            else -> false
+        }
+    }
 
     fun sleep(time: Long) = Thread.sleep(time)
 
@@ -26,7 +38,7 @@ class WeakContext<T>(val weakRef: WeakReference<T>) {
 
     fun isContextAlive(): Boolean {
         val context = weakRef.get() ?: return false
-        return isContextAlive(context)
+        return if (needCheck) isContextAlive(context) else true
     }
 }
 
