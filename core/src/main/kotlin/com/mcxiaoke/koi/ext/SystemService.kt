@@ -115,7 +115,7 @@ fun Context.getKeyguardManager(): KeyguardManager =
 fun Context.getLauncherApps(): LauncherApps =
         getSystemServiceAs(Context.LAUNCHER_APPS_SERVICE)
 
-fun Context.getLayoutInflater(): LayoutInflater =
+fun Context.getLayoutService(): LayoutInflater =
         getSystemServiceAs(Context.LAYOUT_INFLATER_SERVICE)
 
 fun Context.getLocationManager(): LocationManager =

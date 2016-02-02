@@ -15,6 +15,15 @@ fun Cursor.longValue(columnName: String): Long {
     return getLong(getColumnIndexOrThrow(columnName))
 }
 
+fun Cursor.doubleValue(columnName: String): Double {
+    return getDouble(getColumnIndexOrThrow(columnName))
+}
+
+fun Cursor.floatValue(columnName: String): Float {
+    return getFloat(getColumnIndexOrThrow(columnName))
+}
+
+
 fun Cursor.stringValue(columnName: String): String {
     return getString(getColumnIndexOrThrow(columnName))
 }

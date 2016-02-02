@@ -19,8 +19,7 @@ import android.support.v4.app.Fragment as SupportFragment
  */
 
 
-
-val View.displayMetrics: DisplayMetrics
+val View.dm: DisplayMetrics
     get() = resources.displayMetrics
 
 
@@ -36,12 +35,24 @@ fun Float.dpToPx(): Int {
     return Math.round(px)
 }
 
+fun Int.pxToDp(): Int {
+    val metrics = Resources.getSystem().displayMetrics
+    val dp = this / (metrics.densityDpi / 160f)
+    return Math.round(dp)
+}
+
+fun Int.dpToPx(): Int {
+    val metrics = Resources.getSystem().displayMetrics
+    val px = this * (metrics.densityDpi / 160f)
+    return Math.round(px)
+}
+
 fun View.dpToPx(dp: Int): Int {
-    return (dp * this.displayMetrics.density + 0.5).toInt()
+    return (dp * this.dm.density + 0.5).toInt()
 }
 
 fun View.pxToDp(px: Int): Int {
-    return (px / this.displayMetrics.density + 0.5).toInt()
+    return (px / this.dm.density + 0.5).toInt()
 }
 
 fun View.hideSoftKeyboard() {

@@ -1,6 +1,8 @@
 package com.mcxiaoke.koi.ext
 
 import android.app.Activity
+import android.app.Service
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,47 +14,60 @@ import android.os.Bundle
  */
 
 
-inline fun <reified T : Context> Context.getIntent(): Intent =
+inline fun <reified T : Context> Context.newIntent(): Intent =
         Intent(this, T::class.java)
 
-inline fun <reified T : Context> Context.getIntent(flags: Int): Intent {
-    val intent = getIntent<T>()
+inline fun <reified T : Context> Context.newIntent(flags: Int): Intent {
+    val intent = newIntent<T>()
     intent.setFlags(flags)
     return intent
 }
 
-inline fun <reified T : Context> Context.getIntent(extras: Bundle): Intent =
-        getIntent<T>(0, extras)
+inline fun <reified T : Context> Context.newIntent(extras: Bundle): Intent =
+        newIntent<T>(0, extras)
 
-inline fun <reified T : Context> Context.getIntent(flags: Int, extras: Bundle): Intent {
-    val intent = getIntent<T>(flags)
+inline fun <reified T : Context> Context.newIntent(flags: Int, extras: Bundle): Intent {
+    val intent = newIntent<T>(flags)
     intent.putExtras(extras)
     return intent
 }
 
 inline fun <reified T : Activity> Activity.startActivity(): Unit =
-        this.startActivity(getIntent<T>())
+        this.startActivity(newIntent<T>())
 
 inline fun <reified T : Activity> Activity.startActivity(flags: Int): Unit =
-        this.startActivity(getIntent<T>(flags))
+        this.startActivity(newIntent<T>(flags))
 
 inline fun <reified T : Activity> Activity.startActivity(extras: Bundle): Unit =
-        this.startActivity(getIntent<T>(extras))
+        this.startActivity(newIntent<T>(extras))
 
 inline fun <reified T : Activity> Activity.startActivity(flags: Int, extras: Bundle): Unit =
-        this.startActivity(getIntent<T>(flags, extras))
+        this.startActivity(newIntent<T>(flags, extras))
 
 inline fun <reified T : Activity> Activity.startActivityForResult(requestCode: Int): Unit =
-        this.startActivityForResult(getIntent<T>(), requestCode)
+        this.startActivityForResult(newIntent<T>(), requestCode)
 
 inline fun <reified T : Activity> Activity.startActivityForResult(requestCode: Int,
                                                                   flags: Int): Unit =
-        this.startActivityForResult(getIntent<T>(flags), requestCode)
+        this.startActivityForResult(newIntent<T>(flags), requestCode)
 
 inline fun <reified T : Activity> Activity.startActivityForResult(
         extras: Bundle, requestCode: Int): Unit =
-        this.startActivityForResult(getIntent<T>(extras), requestCode)
+        this.startActivityForResult(newIntent<T>(extras), requestCode)
 
 inline fun <reified T : Activity> Activity.startActivityForResult(
         extras: Bundle, requestCode: Int, flags: Int): Unit =
-        this.startActivityForResult(getIntent<T>(flags, extras), requestCode)
+        this.startActivityForResult(newIntent<T>(flags, extras), requestCode)
+
+inline fun <reified T : Service> Context.startService(): ComponentName =
+        this.startService(newIntent<T>())
+
+inline fun <reified T : Service> Context.startService(flags: Int): ComponentName =
+        this.startService(newIntent<T>(flags))
+
+inline fun <reified T : Service> Context.startService(extras: Bundle): ComponentName =
+        this.startService(newIntent<T>(extras))
+
+inline fun <reified T : Service> Context.startService(extras: Bundle,
+                                                      flags: Int): ComponentName
+        = this.startService(newIntent<T>(flags, extras))

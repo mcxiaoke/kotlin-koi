@@ -8,7 +8,7 @@ import java.util.*
  * Time: 13:46
  */
 
-@JvmOverloads fun <T> Array<T>.toString(delim: String = ","): String {
+@JvmOverloads fun <T> Array<T>.asString(delim: String = ","): String {
     if (this.isEmpty()) {
         return ""
     }
@@ -22,7 +22,7 @@ import java.util.*
     return sb.toString()
 }
 
-@JvmOverloads fun <T> Collection<T>.toString(delim: String = ","): String {
+@JvmOverloads fun <T> Collection<T>.asString(delim: String = ","): String {
     if (this.isEmpty()) {
         return ""
     }
@@ -36,7 +36,7 @@ import java.util.*
     return sb.toString()
 }
 
-@JvmOverloads fun <K, V> Map<K, V>.toString(delim: String = ","): String {
+@JvmOverloads fun <K, V> Map<K, V>.asString(delim: String = ","): String {
     if (this.isEmpty()) {
         return ""
     }
@@ -44,7 +44,7 @@ import java.util.*
     for ((k, v) in this) {
         strings.add("$k=$v")
     }
-    return strings.toString(delim)
+    return strings.asString(delim)
 }
 
 fun <T> List<T>.head(): List<T> {

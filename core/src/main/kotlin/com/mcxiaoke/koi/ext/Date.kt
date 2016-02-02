@@ -19,23 +19,17 @@ object DateHelper {
     }
 }
 
-fun dateNow(): String {
-    return Date().asString()
-}
+fun dateNow(): String = Date().asString()
 
-fun dateParse(s: String): Date {
-    val position = ParsePosition(0)
-    return DateHelper.DF_SIMPLE_FORMAT.get().parse(s, position)
-}
+fun timestamp(): Long = System.currentTimeMillis()
 
-fun Date.asString(format: DateFormat): String {
-    return format.format(this)
-}
+fun dateParse(s: String): Date = DateHelper.DF_SIMPLE_FORMAT.get().parse(s, ParsePosition(0))
 
-fun Date.asString(): String {
-    return DateHelper.DF_SIMPLE_FORMAT.get().format(this)
-}
+fun Date.asString(format: DateFormat): String = format.format(this)
 
-fun Long.asDateString(): String {
-    return Date(this).asString()
-}
+fun Date.asString(format: String): String = asString(SimpleDateFormat(format))
+
+fun Date.asString(): String = DateHelper.DF_SIMPLE_FORMAT.get().format(this)
+
+fun Long.asDateString(): String = Date(this).asString()
+

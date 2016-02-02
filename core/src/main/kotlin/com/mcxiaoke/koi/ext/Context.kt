@@ -3,6 +3,7 @@ package com.mcxiaoke.koi.ext
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Fragment
+import android.app.Notification
 import android.content.*
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -12,6 +13,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.support.v4.app.NotificationCompat
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -49,7 +51,15 @@ inline fun <reified T : View> Activity.find(id: Int): T = this.findViewById(id) 
 
 inline fun <reified T : View> Fragment.find(id: Int): T = this.view.findViewById(id) as T
 
-inline fun <reified T : View> android.support.v4.app.Fragment.find(id: Int): T = this.view.findViewById(id) as T
+fun <T : View> android.support.v4.app.Fragment.find(id: Int): T = this.view.findViewById(id) as T
+
+fun <T : View> View.findView(id: Int): T = this.findViewById(id) as T
+
+fun <T : View> Activity.findView(id: Int): T = this.findViewById(id) as T
+
+fun <T : View> Fragment.findView(id: Int): T = this.view.findViewById(id) as T
+
+fun <T : View> android.support.v4.app.Fragment.findView(id: Int): T = this.view.findViewById(id) as T
 
 private fun inflateView(context: Context, layoutResId: Int, parent: ViewGroup?,
                         attachToRoot: Boolean): View =
@@ -92,5 +102,11 @@ fun Context.getResourceValue(resId: Int): Int {
     val value = TypedValue()
     this.resources.getValue(resId, value, true)
     return TypedValue.complexToFloat(value.data).toInt()
+}
+
+inline fun Context.newNotification(func: NotificationCompat.Builder.() -> Unit): Notification {
+    val builder = NotificationCompat.Builder(this)
+    builder.func()
+    return builder.build()
 }
 

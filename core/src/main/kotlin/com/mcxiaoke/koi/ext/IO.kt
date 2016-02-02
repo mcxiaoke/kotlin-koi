@@ -14,7 +14,16 @@ import java.nio.charset.Charset
  * Time: 14:48
  */
 
-fun Closeable?.closeQuietly() {
+fun <T : Closeable> T.doSafe(action: T.() -> Unit) {
+    try {
+        action()
+    } catch(e: IOException) {
+    } finally {
+        closeQuietly()
+    }
+}
+
+fun <T : Closeable> T?.closeQuietly() {
     try {
         this?.close()
     } catch (ignored: IOException) {
@@ -26,6 +35,13 @@ fun URLConnection.close() {
     if (this is HttpURLConnection) {
         this.disconnect()
     }
+}
+
+@Throws(IOException::class)
+fun Reader.readString(): String {
+    var buffer = charArrayOf()
+    this.read(buffer)
+    return String(buffer)
 }
 
 @Throws(IOException::class)
@@ -49,58 +65,54 @@ fun InputStream.readString(encoding: String = Encoding.UTF_8): String {
 }
 
 @Throws(IOException::class)
-fun InputStream.readLines(input: Reader): List<String> {
-    return BufferedReader(input).lineSequence().toList()
+fun Reader.readList(): List<String> {
+    return BufferedReader(this).lineSequence().toList()
 }
 
 @Throws(IOException::class)
-@JvmOverloads fun InputStream.readLines(charset: Charset = Charsets.UTF_8): List<String> {
-    return readLines(reader(charset))
+@JvmOverloads fun InputStream.readList(charset: Charset = Charsets.UTF_8): List<String> {
+    return this.reader(charset).readList()
 }
 
 @Throws(IOException::class)
-@JvmOverloads fun File.readLines(charset: Charset = Charsets.UTF_8): List<String> {
-    return FileInputStream(this).readLines(charset)
+@JvmOverloads fun File.readList(charset: Charset = Charsets.UTF_8): List<String> {
+    return FileInputStream(this).readList(charset)
 }
 
 @Throws(IOException::class)
-@JvmOverloads fun OutputStream.writeLines(lines: Collection<*>?,
-                                          charset: Charset = Charsets.UTF_8,
-                                          lineSeparator: String? = Const.LINE_SEPARATOR) {
+@JvmOverloads fun OutputStream.writeString(string: String, charset: Charset = Charsets.UTF_8) {
+    this.writer(charset).write(string)
+}
+
+
+@Throws(IOException::class)
+@JvmOverloads fun Writer.writeList(lines: Collection<*>?,
+                                   lineSeparator: String = Const.LINE_SEPARATOR) {
+    lines?.forEach { line ->
+        if (line != null) {
+            this.write(line.toString())
+        }
+        this.write(lineSeparator)
+    }
+}
+
+@Throws(IOException::class)
+@JvmOverloads fun OutputStream.writeList(lines: Collection<*>?,
+                                         charset: Charset = Charsets.UTF_8,
+                                         lineSeparator: String = Const.LINE_SEPARATOR) {
     lines?.forEach { line ->
         if (line != null) {
             this.write(line.toString().toByteArray(charset))
         }
-        this.write(lineSeparator?.toByteArray(charset))
+        this.write(lineSeparator.toByteArray(charset))
     }
 }
 
 @Throws(IOException::class)
-@JvmOverloads fun File.writeLines(lines: Collection<*>?,
-                                  charset: Charset = Charsets.UTF_8,
-                                  lineSeparator: String? = Const.LINE_SEPARATOR) {
-    return FileOutputStream(this).writeLines(lines, charset, lineSeparator)
-}
-
-@Throws(IOException::class)
-fun File?.copyTo(destFile: File) {
-    if (this == null) {
-        return
-    }
-    if (!destFile.exists()) {
-        destFile.createNewFile()
-    }
-
-    var source: FileChannel? = null
-    var destination: FileChannel? = null
-    try {
-        source = FileInputStream(this).channel
-        destination = FileOutputStream(destFile).channel
-        destination?.transferFrom(source, 0, source.size())
-    } finally {
-        source?.closeQuietly()
-        destination?.closeQuietly()
-    }
+@JvmOverloads fun File.writeList(lines: Collection<*>?,
+                                 charset: Charset = Charsets.UTF_8,
+                                 lineSeparator: String = Const.LINE_SEPARATOR) {
+    return FileOutputStream(this).writeList(lines, charset, lineSeparator)
 }
 
 fun File.clean(): Boolean {
