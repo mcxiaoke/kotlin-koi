@@ -1,5 +1,6 @@
 package com.mcxiaoke.koi.async
 
+import android.content.Context
 import java.lang.ref.WeakReference
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
@@ -39,13 +40,6 @@ fun <T, R> T.asyncSafe(
         callback: (result: R?, error: Throwable?) -> Unit): Future<Unit> {
     val weakCtx = WeakContext(WeakReference(this))
     return executor.submit<Unit> {
-        //        try {
-        //            val ret = weakCtx.action()
-        //            weakCtx.mainThreadSafe { callback(ret, null) }
-        //        } catch(ex: Exception) {
-        //            weakCtx.mainThreadSafe { callback(null, ex) }
-        //        }
-
         weakCtx.safe {
             try {
                 val ret = action()

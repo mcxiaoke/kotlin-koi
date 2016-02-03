@@ -35,6 +35,7 @@ object CoreExecutor {
     }
 }
 
+fun koiHandler(): Handler = CoreExecutor.mainHandler
 fun koiExecutor(): ExecutorService = CoreExecutor.executor
 
 

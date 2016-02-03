@@ -34,7 +34,7 @@ class WeakContext<T>(val weakRef: WeakReference<T>) {
 
     fun sleep(time: Long) = Thread.sleep(time)
 
-    fun getContext(): T = weakRef.get()
+    fun getCtx(): T = weakRef.get()
 
     fun isContextAlive(): Boolean {
         val context = weakRef.get() ?: return false
@@ -72,24 +72,14 @@ inline fun <T> T.safeExecute(
     }
 }
 
-fun delayOnMainThread(delayMillis: Long, action: () -> Unit): Boolean
+fun mainThreadDelay(delayMillis: Long, action: () -> Unit): Boolean
         = CoreExecutor.mainHandler.postDelayed(action, delayMillis)
 
-fun mainThread(action: () -> Unit): Boolean = CoreExecutor.mainHandler.post(action)
-
-fun Context.mainThread(action: Context.() -> Unit) {
+inline fun mainThread(crossinline action: () -> Unit) {
     when {
         isMainThread() -> action()
         else -> CoreExecutor.mainHandler.post { action() }
     }
-}
-
-inline fun Fragment.mainThread(crossinline action: () -> Unit) {
-    activity.mainThread { action() }
-}
-
-inline fun SupportFragment.mainThread(crossinline action: () -> Unit) {
-    activity.mainThread { action() }
 }
 
 inline fun <T> WeakContext<T>.mainThread(crossinline action: (T) -> Unit) {
