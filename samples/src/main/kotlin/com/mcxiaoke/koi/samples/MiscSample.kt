@@ -17,7 +17,7 @@ import com.mcxiaoke.koi.utils.*
  */
 class OtherExtensionSample {
 
-    fun sample1() {
+    fun numberExtensions() {
         val number = 179325344324902187L
         println(number.readableByteCount())
 
@@ -25,7 +25,8 @@ class OtherExtensionSample {
         println(bytes.hexString())
     }
 
-    fun stringSample() {
+    // available for String
+    fun stringExtensions() {
         val string = "hello, little cat!"
         val quotedString = string.quote()
         val isBlank = string.isBlank()
@@ -46,19 +47,22 @@ class OtherExtensionSample {
         val name = path.fileName()
     }
 
-    fun coreFunctions() {
+    fun threadFunctions() {
         val tn = threadName()
     }
 
-    fun cryptoSample() {
+    // available in any where
+    fun cryptoFunctions() {
         val md5 = HASH.md5("hello, world")
         val sha1 = HASH.sha1("hello, world")
         val sha256 = HASH.sha256("hello, world")
 
     }
 
-    fun apiLevelSample() {
-        val v = currentVersion() // Build.VERSION.SDK_INT
+    // available in any where
+    fun apiLevelFunctions() {
+        // Build.VERSION.SDK_INT
+        val v = currentVersion()
         val ics = icsOrNewer()
         val kk = kitkatOrNewer()
         val bkk = beforeKitkat()
@@ -66,6 +70,7 @@ class OtherExtensionSample {
         val mar = marshmallowOrNewer()
     }
 
+    // available in any where
     fun deviceSample() {
         val a = isLargeHeap
         val b = noSdcard()
@@ -73,6 +78,8 @@ class OtherExtensionSample {
         val d = freeSpace()
     }
 
+    // available in any where
+    // null and empty check
     fun preconditions() {
         throwIfEmpty(listOf(), "collection is null or empty")
         throwIfNull(null, "object is null")
@@ -82,6 +89,7 @@ class OtherExtensionSample {
 
 }
 
+// easy way to create Android Parcelable class
 data class Person(val name: String, val age: Int) : Parcelable {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -95,6 +103,7 @@ data class Person(val name: String, val age: Int) : Parcelable {
     }
 
     companion object {
+        // using createParcel
         @JvmField val CREATOR = createParcel { Person(it) }
     }
 }

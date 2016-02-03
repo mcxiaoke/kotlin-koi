@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.samples
+package com.mcxiaoke.koi.samples.app
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,7 @@ import com.mcxiaoke.koi.async.*
 import com.mcxiaoke.koi.ext.quickAdapterOf
 import com.mcxiaoke.koi.log.logd
 import com.mcxiaoke.koi.log.logv
+import com.mcxiaoke.koi.samples.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread

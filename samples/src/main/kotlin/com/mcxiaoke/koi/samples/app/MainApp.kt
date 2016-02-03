@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.samples
+package com.mcxiaoke.koi.samples.app
 
 import android.app.Application
 import com.mcxiaoke.koi.KoiConfig

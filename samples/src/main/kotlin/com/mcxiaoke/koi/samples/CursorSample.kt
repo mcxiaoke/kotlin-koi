@@ -10,6 +10,7 @@ import com.mcxiaoke.koi.ext.*
  * Author: mcxiaoke
  * Date:  2016/2/2 21:10
  */
+// sample data class
 data class UserInfo(val name: String, val age: Int, val bio: String?, val hasPet: Boolean)
 
 class CursorExtensionSample(context: Context, name: String,
@@ -24,7 +25,8 @@ class CursorExtensionSample(context: Context, name: String,
         throw UnsupportedOperationException()
     }
 
-    fun cursorValue() {
+    // available for Cursor
+    fun cursorValueExtensions() {
         val cursor = this.writableDatabase.query("table", null, null, null, null, null, null)
         cursor.moveToFirst()
         do {
@@ -34,9 +36,15 @@ class CursorExtensionSample(context: Context, name: String,
             val booleanValue = cursor.booleanValue("column-d")
             val doubleValue = cursor.doubleValue("column-e")
             val floatValue = cursor.floatValue("column-f")
+
+            // no need to do like this, so verbose
+            cursor.getInt(cursor.getColumnIndexOrThrow("column-a"))
+            cursor.getString(cursor.getColumnIndexOrThrow("column-b"))
         } while (cursor.moveToNext())
     }
 
+    // available for Cursor
+    // transform cursor to model object
     fun cursorToModels() {
         val where = " age>? "
         val whereArgs = arrayOf("20")
@@ -61,6 +69,9 @@ class CursorExtensionSample(context: Context, name: String,
         // or using Cursor?mapTo(collection, transform())
     }
 
+
+    // available for SQLiteDatabase and SQLiteOpenHelper
+    // auto apply transaction to db operations
     fun inTransaction() {
         val db = this.writableDatabase
         val values = ContentValues()

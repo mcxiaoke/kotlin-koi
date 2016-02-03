@@ -14,6 +14,7 @@ import com.mcxiaoke.koi.ext.*
 class ViewExtensionSample(ctx: Context) : View(ctx) {
 
 
+    // available for View
     fun viewSample() {
         val w = dm.widthPixels
         val h = dm.heightPixels
@@ -35,10 +36,6 @@ class ViewExtensionSample(ctx: Context) : View(ctx) {
         val editText = EditText(context)
         editText.showSoftKeyboard()
         editText.toggleSoftKeyboard()
-    }
-
-    fun adapterSample(){
-
     }
 
 }

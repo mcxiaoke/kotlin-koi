@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.tests
+package com.mcxiaoke.koi.samples.tests
 
 import com.mcxiaoke.koi.assert.throwIfFalse
 import com.mcxiaoke.koi.assert.throwIfTrue

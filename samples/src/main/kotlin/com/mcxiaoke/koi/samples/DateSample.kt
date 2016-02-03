@@ -11,6 +11,7 @@ import java.util.*
 class DateExtensionSample {
 
 
+    // available in any where
     fun dateSample() {
         val nowString = dateNow()
         val date = dateParse("2016-02-02 20:30:45")
@@ -18,6 +19,7 @@ class DateExtensionSample {
         val dateStr2 = date.asString(SimpleDateFormat("yyyyMMdd.HHmmss"))
         val dateStr3 = date.asString("yyyy-MM-dd-HH-mm-ss")
 
+        // easy way to get timestamp
         val timestamp1 = timestamp()
         // equal to
         val timestamp2 = System.currentTimeMillis()

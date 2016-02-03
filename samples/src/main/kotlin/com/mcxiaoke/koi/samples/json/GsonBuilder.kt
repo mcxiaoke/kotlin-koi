@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.json
+package com.mcxiaoke.koi.samples.json
 
 /**
  * User: mcxiaoke

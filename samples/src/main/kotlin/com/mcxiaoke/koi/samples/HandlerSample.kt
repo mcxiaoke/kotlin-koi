@@ -10,6 +10,8 @@ import com.mcxiaoke.koi.ext.*
 
 class HandlerExtensionSample {
 
+    // available for Handler
+    // short name for functions
     fun handlerFunctions() {
         val handler = Handler()
 

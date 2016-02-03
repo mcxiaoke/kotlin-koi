@@ -11,6 +11,10 @@ fun Cursor.intValue(columnName: String): Int {
     return getInt(getColumnIndexOrThrow(columnName))
 }
 
+fun Cursor.shortValue(columnName: String): Short {
+    return getShort(getColumnIndexOrThrow(columnName))
+}
+
 fun Cursor.longValue(columnName: String): Long {
     return getLong(getColumnIndexOrThrow(columnName))
 }

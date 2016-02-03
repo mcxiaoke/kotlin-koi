@@ -9,10 +9,12 @@ import com.mcxiaoke.koi.ext.Bundle
  * Date:  2016/2/2 20:48
  */
 
-class BundleExtensionSample : Activity() {
+class BundleExtensionSample {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    // available in any where
+    fun bundleExtension() {
+        // easy way to create bundle
         val bundle = Bundle {
             putString("key", "value")
             putInt("int", 12345)
@@ -21,6 +23,7 @@ class BundleExtensionSample : Activity() {
             putStringArrayList("strings", arrayListOf("Hello", "World", "Cat"))
         }
 
+        // equal to using with
         val bundle2 = Bundle()
         with(bundle2) {
             putString("key", "value")
@@ -29,7 +32,5 @@ class BundleExtensionSample : Activity() {
             putIntArray("intArray", intArrayOf(1, 2, 3, 4, 5))
             putStringArrayList("strings", arrayListOf("Hello", "World", "Cat"))
         }
-
-
     }
 }

@@ -1,4 +1,4 @@
-package com.mcxiaoke.koi.json
+package com.mcxiaoke.koi.samples.json
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement
@@ -6,7 +6,7 @@ import com.google.gson.TypeAdapter
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
-import com.mcxiaoke.koi.json.typeToken
+import com.mcxiaoke.koi.samples.json.typeToken
 import java.io.Reader
 
 /**

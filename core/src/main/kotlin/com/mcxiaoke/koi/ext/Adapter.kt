@@ -13,9 +13,9 @@ import com.mcxiaoke.koi.adapter.QuickViewBinder
 fun <T : Any> Activity.quickAdapterOf(
         layoutId: Int,
         items: Collection<T>,
-        renderer: ((QuickViewBinder, T) -> Unit))
+        bind: ((QuickViewBinder, T) -> Unit))
         : QuickAdapter<T> {
-    val adapter = quickAdapterOf(layoutId, renderer)
+    val adapter = quickAdapterOf(layoutId, bind)
     adapter.addAll(items)
     return adapter
 }
@@ -23,9 +23,9 @@ fun <T : Any> Activity.quickAdapterOf(
 fun <T : Any> Activity.quickAdapterOf(
         layoutId: Int,
         items: Array<T>,
-        renderer: ((QuickViewBinder, T) -> Unit))
+        bind: ((QuickViewBinder, T) -> Unit))
         : QuickAdapter<T> {
-    val adapter = quickAdapterOf(layoutId, renderer)
+    val adapter = quickAdapterOf(layoutId, bind)
     adapter.addAll(items.toList())
     return adapter
 }
@@ -33,16 +33,16 @@ fun <T : Any> Activity.quickAdapterOf(
 fun <T : Any> Activity.quickAdapterOf(
         layoutId: Int,
         items: Set<T>,
-        renderer: ((QuickViewBinder, T) -> Unit))
+        bind: ((QuickViewBinder, T) -> Unit))
         : QuickAdapter<T> {
-    val adapter = quickAdapterOf(layoutId, renderer)
+    val adapter = quickAdapterOf(layoutId, bind)
     adapter.addAll(items)
     return adapter
 }
 
 fun <T : Any> Activity.quickAdapterOf(
         layoutId: Int,
-        renderer: ((QuickViewBinder, T) -> Unit))
+        bind: ((QuickViewBinder, T) -> Unit))
         : QuickAdapter<T> {
-    return QuickAdapter(this, layoutId, renderer)
+    return QuickAdapter(this, layoutId, bind)
 }

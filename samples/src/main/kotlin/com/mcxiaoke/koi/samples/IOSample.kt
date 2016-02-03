@@ -10,6 +10,8 @@ import java.io.*
  */
 
 class IOExtensionSample {
+
+    // available for Closeable
     fun closeableSample() {
         val input = FileInputStream(File("readme.txt"))
         try {
@@ -21,7 +23,8 @@ class IOExtensionSample {
         }
     }
 
-    // equal to closeableSample
+    // simple way, equal to closeableSample
+    // InputStream.doSafe{}
     fun doSafeSample() {
         val input = FileInputStream(File("readme.txt"))
         input.doSafe {
@@ -29,7 +32,9 @@ class IOExtensionSample {
         }
     }
 
-    fun readSample1() {
+
+    // available for InputStream/Reader
+    fun readStringAndList1() {
         val input = FileInputStream(File("readme.txt"))
         try {
             val reader = input.reader(Encoding.CHARSET_UTF_8)
@@ -47,8 +52,9 @@ class IOExtensionSample {
         }
     }
 
-    //equal to readSample1
-    fun readSample2() {
+    // available for InputStream/Reader
+    //equal to readStringAndList1
+    fun readStringAndList2() {
         val input = FileInputStream(File("readme.txt"))
         input.doSafe {
             val reader = reader(Encoding.CHARSET_UTF_8)
@@ -61,10 +67,9 @@ class IOExtensionSample {
 
         }
 
-
     }
 
-    fun writeSample() {
+    fun writeStringAndList() {
         val output = FileOutputStream("output.txt")
         output.doSafe {
             output.writeString("hello, world")
@@ -79,13 +84,15 @@ class IOExtensionSample {
         }
     }
 
-    fun fileReadWriteSample() {
+    fun fileReadWrite() {
         val directory = File("/Users/koi/workspace")
         val file = File("some.txt")
+
         val text1 = file.readText()
         val text2 = file.readString(Encoding.CHARSET_UTF_8)
         val list1 = file.readList()
         val list2 = file.readLines(Encoding.CHARSET_UTF_8)
+
         file.writeText("hello, world")
         file.writeList(list1)
         file.writeList(list2, Encoding.CHARSET_UTF_8)
@@ -93,6 +100,7 @@ class IOExtensionSample {
         val v1 = file.relativeToOrNull(directory)
         val v2 = file.toRelativeString(directory)
 
+        // clean files in directory
         directory.clean()
 
 
