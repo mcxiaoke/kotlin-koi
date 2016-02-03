@@ -64,9 +64,7 @@ class IOExtensionSample {
 
             val list1 = readList()
             val list2 = readList(Encoding.CHARSET_UTF_8)
-
         }
-
     }
 
     fun writeStringAndList() {
@@ -79,8 +77,6 @@ class IOExtensionSample {
             val list2 = (1..8).map { "Item No.$it" }
             output.writeList(list1, charset = Encoding.CHARSET_UTF_8)
             output.writeList(list2)
-
-
         }
     }
 

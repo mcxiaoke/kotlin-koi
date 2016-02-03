@@ -20,7 +20,7 @@ class AsyncFunctionsSample {
     //
     // available in any where
     // using in Activity/Fragment better
-    fun asyncSafeFunctions() {
+    fun asyncSafeFunction1() {
         // safe means context alive check
         // async
         asyncSafe {
@@ -47,6 +47,12 @@ class AsyncFunctionsSample {
                 print("code here executed in main thread")
             }
         }
+        // if your result or error is nullable
+        // using asyncSafe2, just as asyncSafe
+        // but type of result and error is T?, Throwable?
+    }
+
+    fun asyncSafeFunction2() {
 
         // async with callback
         asyncSafe(
@@ -58,7 +64,9 @@ class AsyncFunctionsSample {
                     // in main thread
                     print("callback executed in main thread")
                 })
+    }
 
+    fun asyncSafeFunction3() {
         // async with success/failure callback
         asyncSafe(
                 {
@@ -74,10 +82,6 @@ class AsyncFunctionsSample {
                     // if action failed with exception
                     print("failure callback in main thread, error:$error")
                 })
-
-        // if your result or error is nullable
-        // using asyncSafe2, just as asyncSafe
-        // but type of result and error is T?, Throwable?
     }
 
 

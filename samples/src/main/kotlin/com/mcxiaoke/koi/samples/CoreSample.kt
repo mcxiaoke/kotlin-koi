@@ -49,7 +49,6 @@ class AsyncCoreSample {
 
     // available in any where
     fun safeFunctions() {
-
         val context = this
         // check Activity/Fragment lifecycle
         val alive = isContextAlive(context)
@@ -79,7 +78,5 @@ class AsyncCoreSample {
 
         // direct use
         safeExecute { print("func1") }
-
-
     }
 }

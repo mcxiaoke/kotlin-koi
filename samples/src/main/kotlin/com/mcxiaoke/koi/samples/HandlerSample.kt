@@ -32,6 +32,5 @@ class HandlerExtensionSample {
         // equal to
         handler.postDelayed({ print("perform action after 5s") }, 3000)
 
-
     }
 }
