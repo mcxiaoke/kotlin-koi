@@ -1,16 +1,77 @@
-# Koi - Kotlin for Android Developers
+# Koi
 
->Koi - A lightweight kotlin library for Android Development. 
+## A lightweight Kotlin library for Android (only ~160k)
 
 ## Gradle
 
 ```gradle
-    compile 'com.mcxiaoke.koi:core:0.3.+' // useful extensions
-    compile 'com.mcxiaoke.koi:async:0.3.+' // async functions
+    compile 'com.mcxiaoke.koi:core:0.3.+' // useful extensions (only ~90k)
+    compile 'com.mcxiaoke.koi:async:0.3.+' // async functions (only ~70k)
 ```
 
-## Context Extensions
+## Usage
 
+  * [Context Extensions](#context-extensions)
+    * [Activity/Application/View](#activityapplicationview)
+    * [Easy to use Toast](#easy-to-use-toast)
+    * [Activity/Application/View](#activityapplicationview)
+    * [Easy to Inflate Layout](#easy-to-inflate-layout)
+    * [Useful Functions](#useful-functions)
+    * [Easy to create Intent](#easy-to-create-intent)
+    * [Easy to Start Activity](#easy-to-start-activity)
+    * [Easy to Start Service](#easy-to-start-service)
+    * [Network State](#network-state)
+    * [Notification Builder](#notification-builder)
+    * [Package Functions](#package-functions)
+    * [Easy to get System Service](#easy-to-get-system-service)
+    * [Easy to Log](#easy-to-log)
+  * [View Extensions](#view-extensions)
+    * [View Utils](#view-utils)
+  * [Adapter Extensions](#adapter-extensions)
+    * [Easy to Create Adapter](#easy-to-create-adapter)
+  * [Bundle Extensions](#bundle-extensions)
+    * [Bundle Builder](#bundle-builder)
+  * [Parcelable Extensions](#parcelable-extensions)
+    * [Easy to create Parcelable](#easy-to-create-parcelable)
+  * [Collection Extensions](#collection-extensions)
+    * [Collection to String](#collection-to-string)
+    * [Map to String](#map-to-string)
+    * [List Append](#list-append)
+  * [Database Extensions](#database-extensions)
+    * [Easy to get Cursor Value](#easy-to-get-cursor-value)
+    * [Easy to convert Cursor to Model](#easy-to-convert-cursor-to-model)
+    * [Easy to use Transaction](#easy-to-use-transaction)
+  * [IO Extensions](#io-extensions)
+    * [Easy to close Stream](#easy-to-close-stream)
+    * [Stream doSafe Function](#stream-dosafe-function)
+    * [readString/readList](#readstringreadlist)
+    * [readString/readList using doSafe](#readstringreadlist-using-dosafe)
+    * [writeString/writeList using doSafe](#writestringwritelist-using-dosafe)
+    * [File Read and Write](#file-read-and-write)
+  * [Handler Extensions](#handler-extensions)
+    * [Easy to use Handler](#easy-to-use-handler)
+  * [Other Extensions](#other-extensions)
+    * [Date Functions](#date-functions)
+    * [Number Functions](#number-functions)
+    * [String Functions](#string-functions)
+    * [Crypto Functions](#crypto-functions)
+    * [Check API Level](#check-api-level)
+    * [Device Functions](#device-functions)
+    * [Preconditions](#preconditions)
+  * [Thread Functions](#thread-functions)
+    * [Create Thread Pool](#create-thread-pool)
+    * [Main Thread Functions](#main-thread-functions)
+    * [Context Check](#context-check)
+    * [Safe Functions](#safe-functions)
+  * [Async Functions](#async-functions)
+    * [With Context Check 1](#with-context-check-1)
+    * [With Context Check 2](#with-context-check-2)
+    * [Without Context Check](#without-context-check)
+    * [With Delay](#with-delay)
+
+### Context Extensions
+
+#### Activity/Application/View
 ```kotlin
 // available for Activity
 fun activityExtensions() {
@@ -18,10 +79,14 @@ fun activityExtensions() {
     act.restart() // restart Activity
     val app = act.getApp() // Application
     val app2 = act.application  // Application
+    // Activity.find()
+    // Fragment.find()
+    // View.find()
     val textView = act.find<TextView>(android.R.id.text1)
 }
 ```
 
+#### Easy to use Toast
 ```kotlin
 // available for Context
 fun toastExtensions() {
@@ -33,6 +98,7 @@ fun toastExtensions() {
 }
 ```
 
+#### Activity/Application/View
 ```kotlin
 // available for Fragment
 fun fragmentExtensions() {
@@ -43,6 +109,7 @@ fun fragmentExtensions() {
     }
 ```
 
+#### Easy to Inflate Layout
 ```kotlin
     // available for Context
     fun inflateLayout() {
@@ -52,6 +119,7 @@ fun fragmentExtensions() {
     }
 ```
 
+#### Useful Functions
 ```kotlin
 // available for Context
 fun miscExtensions() {
@@ -65,6 +133,7 @@ fun miscExtensions() {
 }
 ```
 
+#### Easy to create Intent
 ```kotlin
 // available for Context
 fun intentExtensions() {
@@ -74,6 +143,7 @@ fun intentExtensions() {
 }
 ```
 
+#### Easy to Start Activity
 ```kotlin
 // available for Activity
 fun startActivityExtensions() {
@@ -90,6 +160,7 @@ fun startActivityExtensions() {
 }
 ```
 
+#### Easy to Start Service
 ```kotlin
 // available for Context
 fun startServiceExtensions() {
@@ -98,6 +169,7 @@ fun startServiceExtensions() {
 }
 ```
 
+#### Network State
 ```kotlin
 // available for Context
 fun networkExtensions() {
@@ -110,6 +182,7 @@ fun networkExtensions() {
 }
 ```
 
+#### Notification Builder
 ```kotlin
 // available for Context
 fun notificationExtensions() {
@@ -129,6 +202,7 @@ fun notificationExtensions() {
 }
 ```
 
+#### Package Functions
 ```kotlin
 // available for Context
 fun packageExtensions() {
@@ -143,6 +217,7 @@ fun packageExtensions() {
 }
 ```
 
+#### Easy to get System Service
 ```kotlin
 // available for Context
 // easy way to get system service, no cast
@@ -161,6 +236,7 @@ fun systemServices() {
 }
 ```
 
+#### Easy to Log
 ```kotlin
 // available for Context
 fun logExtensions() {
@@ -181,36 +257,33 @@ fun logExtensions() {
 }
 ```
 
-## View Extensions
+### View Extensions
 
+#### View Utils
 ```kotlin
 // available for View
 fun viewSample() {
     val w = dm.widthPixels
     val h = dm.heightPixels
-
     val v1 = 32.5f
     val dp1 = v1.pxToDp()
-
     val v2 = 24f
     val px1 = v2.dpToPx()
-
     val dp2 = pxToDp(56)
     val px2 = dpToPx(32)
-
     val dp3 = 72.pxToDp()
     val px3 = 48.dpToPx()
 
     hideSoftKeyboard()
-
     val editText = EditText(context)
     editText.showSoftKeyboard()
     editText.toggleSoftKeyboard()
 }
 ```
 
-## Adapter Extensions
+### Adapter Extensions
 
+#### Easy to Create Adapter
 ```kotlin
 // easy way to create array adapter
 fun adapterFunctions() {
@@ -242,9 +315,9 @@ fun adapterFunctions() {
 }
 ```
 
+### Bundle Extensions
 
-## Bundle Extensions
-
+#### Bundle Builder
 ```kotlin
 // available in any where
 fun bundleExtension() {
@@ -269,8 +342,9 @@ fun bundleExtension() {
 }
 ```
 
-## Parcelable Extensions
+### Parcelable Extensions
 
+#### Easy to create Parcelable
 ```kotlin
 // easy way to create Android Parcelable class
 data class Person(val name: String, val age: Int) : Parcelable {
@@ -288,8 +362,9 @@ data class Person(val name: String, val age: Int) : Parcelable {
 }
 ```
 
-## Collection Extensions
+### Collection Extensions
 
+#### Collection to String
 ```kotlin
 fun collectionToString() {
     val pets = listOf<String>("Cat", "Dog", "Rabbit", "Fish")
@@ -308,6 +383,7 @@ fun collectionToString() {
 }
 ```
 
+#### Map to String
 ```kotlin
 fun mapToString() {
     val map = mapOf<String, Int>(
@@ -324,6 +400,7 @@ fun mapToString() {
 }
 ```
 
+#### List Append
 ```kotlin
 fun appendAndPrepend() {
     val numbers = (1..6).toArrayList()
@@ -335,8 +412,9 @@ fun appendAndPrepend() {
 }
 ```
 
-## Database Extensions
+### Database Extensions
 
+#### Easy to get Cursor Value
 ```kotlin
 // available for Cursor
 fun cursorValueExtensions() {
@@ -357,6 +435,7 @@ fun cursorValueExtensions() {
 }
 ```
 
+#### Easy to convert Cursor to Model
 ```kotlin
 // available for Cursor
 // transform cursor to model object
@@ -385,6 +464,7 @@ fun cursorToModels() {
 }
 ```
 
+#### Easy to use Transaction
 ```kotlin
 // available for SQLiteDatabase and SQLiteOpenHelper
 // auto apply transaction to db operations
@@ -409,8 +489,9 @@ fun inTransaction() {
 }
 ```
 
-## IO Extensions
+### IO Extensions
 
+#### Easy to close Stream
 ```kotlin
 // available for Closeable
 fun closeableSample() {
@@ -423,7 +504,10 @@ fun closeableSample() {
         input.closeQuietly()
     }
 }
+```
 
+#### Stream doSafe Function
+```kotlin
 // simple way, equal to closeableSample
 // InputStream.doSafe{}
 fun doSafeSample() {
@@ -434,6 +518,7 @@ fun doSafeSample() {
 }
 ```
 
+####  readString/readList
 ```kotlin
 // available for InputStream/Reader
 fun readStringAndList1() {
@@ -455,6 +540,7 @@ fun readStringAndList1() {
 }
 ```
 
+#### readString/readList using doSafe
 ```kotlin
 // available for InputStream/Reader
 //equal to readStringAndList1
@@ -472,6 +558,7 @@ fun readStringAndList2() {
 }
 ```
 
+#### writeString/writeList using doSafe
 ```kotlin
 fun writeStringAndList() {
     val output = FileOutputStream("output.txt")
@@ -487,6 +574,7 @@ fun writeStringAndList() {
 }
 ```
 
+#### File Read and Write
 ```kotlin
 fun fileReadWrite() {
     val directory = File("/Users/koi/workspace")
@@ -514,8 +602,9 @@ fun fileReadWrite() {
 }
 ```
 
-## Handler Extensions
+### Handler Extensions
 
+#### Easy to use Handler
 ```kotlin
 // available for Handler
 // short name for functions
@@ -539,8 +628,9 @@ fun handlerFunctions() {
 }
 ```
 
-## Other Extensions
+### Other Extensions
 
+#### Date Functions
 ```kotlin
 // available in any where
 fun dateSample() {
@@ -558,6 +648,7 @@ fun dateSample() {
 }
 ```
 
+#### Number Functions
 ```kotlin
 fun numberExtensions() {
     val number = 179325344324902187L
@@ -568,6 +659,7 @@ fun numberExtensions() {
 }
 ```
 
+#### String Functions
 ```kotlin
 // available for String
 fun stringExtensions() {
@@ -592,6 +684,7 @@ fun stringExtensions() {
 }
 ```
 
+#### Crypto Functions
 ```kotlin
 // available in any where
 fun cryptoFunctions() {
@@ -601,6 +694,7 @@ fun cryptoFunctions() {
 }
 ```
 
+#### Check API Level
 ```kotlin
 // available in any where
 fun apiLevelFunctions() {
@@ -614,6 +708,7 @@ fun apiLevelFunctions() {
 }
 ```
 
+#### Device Functions
 ```kotlin
 // available in any where
 fun deviceSample() {
@@ -624,6 +719,7 @@ fun deviceSample() {
 }
 ```
 
+#### Preconditions
 ```kotlin
 // available in any where
 // null and empty check
@@ -635,8 +731,9 @@ fun preconditions() {
 }
 ```
 
-## Thread Functions
+###Thread Functions
 
+#### Create Thread Pool
 ```kotlin
 // available in any where
 fun executorFunctions() {
@@ -657,6 +754,7 @@ fun executorFunctions() {
 }
 ```
 
+#### Main Thread Functions
 ```kotlin
 // available in any where
 fun mainThreadFunctions() {
@@ -676,12 +774,8 @@ fun mainThreadFunctions() {
 }
 ```
 
+#### Context Check
 ```kotlin
-// available in any where
-fun safeFunctions() {
-    val context = this
-    // check Activity/Fragment lifecycle
-    val alive = isContextAlive(context)
 
     // isContextAlive function impl
     fun <T> isContextAlive(context: T?): Boolean {
@@ -694,6 +788,15 @@ fun safeFunctions() {
             else -> true
         }
     }
+```
+
+#### Safe Functions
+```kotlin
+// available in any where
+fun safeFunctions() {
+    val context = this
+    // check Activity/Fragment lifecycle
+    val alive = isContextAlive(context)
 
     fun func1() {
         print("func1")
@@ -711,7 +814,7 @@ fun safeFunctions() {
 }
 ```
 
-## Async Functions
+### Async Functions
 
 ```kotlin
 class AsyncFunctionsSample {
@@ -720,6 +823,7 @@ class AsyncFunctionsSample {
 }
 ```
 
+#### With Context Check 1
 ```kotlin
 // async functions with context check
 // internal using isContextAlive
@@ -763,6 +867,7 @@ fun asyncSafeFunction1() {
 }
 ```
 
+#### With Context Check 2
 ```kotlin
 fun asyncSafeFunction2() {
 
@@ -799,6 +904,7 @@ fun asyncSafeFunction3() {
 }
 ```
 
+#### Without Context Check
 ```kotlin
 // if you don't want context check
 // using asyncUnsafe series functions
@@ -817,6 +923,8 @@ fun asyncUnsafeFunctions() {
     }
 }
 ```
+
+#### With Delay
 ```kotlin
 // async functions with delay
 // with context check
@@ -843,15 +951,15 @@ fun asyncDelayFunctions() {
 }
 ```
 
-## About Me
+### About Me
 
-### Contacts
+#### Contacts
 
 * Blog: <http://blog.mcxiaoke.com>
 * Github: <https://github.com/mcxiaoke>
 * Email: [github@mcxiaoke.com](mailto:github@mcxiaoke.com)
 
-### Projects
+#### Projects
 
 * awesome-kotlin: <https://github.com/mcxiaoke/awesome-kotlin>
 * Android-Next: <https://github.com/mcxiaoke/Android-Next>
@@ -866,7 +974,7 @@ fun asyncDelayFunctions() {
 
 ------
 
-## License
+### License
 
     Copyright 2015, 2016 Xiaoke Zhang
 
