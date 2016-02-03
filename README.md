@@ -12,9 +12,9 @@
 ## Usage
 
   * [Context Extensions](#context-extensions)
-    * [Activity/Application/View](#activityapplicationview)
+    * [Activity Functions](#activity-functions)
+    * [Fragment Functions](#fragment-functions)
     * [Easy to use Toast](#easy-to-use-toast)
-    * [Activity/Application/View](#activityapplicationview)
     * [Easy to Inflate Layout](#easy-to-inflate-layout)
     * [Useful Functions](#useful-functions)
     * [Easy to create Intent](#easy-to-create-intent)
@@ -71,7 +71,7 @@
 
 ### Context Extensions
 
-#### Activity/Application/View
+#### Activity Functions
 ```kotlin
 // available for Activity
 fun activityExtensions() {
@@ -86,6 +86,17 @@ fun activityExtensions() {
 }
 ```
 
+#### Fragment Functions
+```kotlin
+// available for Fragment
+fun fragmentExtensions() {
+    val act = activity // Activity
+    val app = getApp() // Application
+    val textView = find<TextView>(android.R.id.text1) // view.findViewById
+    val imageView = find<TextView>(android.R.id.icon1) // view.findViewById
+    }
+```
+
 #### Easy to use Toast
 ```kotlin
 // available for Context
@@ -96,17 +107,6 @@ fun toastExtensions() {
     longToast(R.string.app_name)
     longToast("this is a long toast")
 }
-```
-
-#### Activity/Application/View
-```kotlin
-// available for Fragment
-fun fragmentExtensions() {
-    val act = activity // Activity
-    val app = getApp() // Application
-    val textView = find<TextView>(android.R.id.text1) // view.findViewById
-    val imageView = find<TextView>(android.R.id.icon1) // view.findViewById
-    }
 ```
 
 #### Easy to Inflate Layout
