@@ -11,6 +11,7 @@
 
 ## Usage
 
+<!-- toc -->
   * [Context Extensions](#context-extensions)
     * [Activity Functions](#activity-functions)
     * [Fragment Functions](#fragment-functions)
@@ -23,9 +24,12 @@
     * [Network State](#network-state)
     * [Notification Builder](#notification-builder)
     * [Package Functions](#package-functions)
-    * [Easy to get System Service](#easy-to-get-system-service)
+    * [System Service](#system-service)
     * [Easy to Log](#easy-to-log)
   * [View Extensions](#view-extensions)
+    * [View Listeners 1](#view-listeners-1)
+    * [View Listeners 2](#view-listeners-2)
+    * [ListView Listeners](#listview-listeners)
     * [View Utils](#view-utils)
   * [Adapter Extensions](#adapter-extensions)
     * [Easy to Create Adapter](#easy-to-create-adapter)
@@ -68,6 +72,9 @@
     * [With Context Check 2](#with-context-check-2)
     * [Without Context Check](#without-context-check)
     * [With Delay](#with-delay)
+
+<!-- toc stop -->
+
 
 ### Context Extensions
 
@@ -217,7 +224,7 @@ fun packageExtensions() {
 }
 ```
 
-#### Easy to get System Service
+#### System Service
 ```kotlin
 // available for Context
 // easy way to get system service, no cast
@@ -258,6 +265,73 @@ fun logExtensions() {
 ```
 
 ### View Extensions
+
+#### View Listeners 1
+```kotlin
+fun viewListeners1() {
+    val view = View(this)
+    // View.OnClickListener
+    view.onClick { print("view clicked") }
+    // View.OnLongClickListener
+    view.onLongClick { print("view long clicked");false }
+    // View.OnKeyListener
+    view.onKeyEvent { view, keyCode, event ->
+        print("keyEvent: action:${event.action} code:$keyCode")
+        false
+    }
+    // View.OnTouchListener
+    view.onTouchEvent { view, event ->
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> print("touch down")
+            MotionEvent.ACTION_UP -> print("touch up")
+            MotionEvent.ACTION_MOVE -> print("touch move")
+        }
+        false
+    }
+    // View.OnFocusChangeListener
+    view.onFocusChange { view, hasFocus ->
+        print("focus changed = $hasFocus")
+    }
+}
+```
+
+#### View Listeners 2
+```kotlin
+fun viewListeners2() {
+    // TextWatcher
+    val editText = EditText(this)
+    editText.onTextChange { text, start, before, count ->
+        print("text changed: $text")
+    }
+
+    // OnCheckedChangeListener
+    val checkBox = CheckBox(this)
+    checkBox.onCheckedChanged { button, isChecked ->
+        print("CheckBox value changed:$isChecked")
+    }
+
+    // OnSeekBarChangeListener
+    val seekBar = SeekBar(this)
+    seekBar.onProgressChanged { seekBar, progress, fromUser ->
+        print("seekBar progress: $progress")
+    }
+}
+````
+
+#### ListView Listeners
+```kotlin
+fun listViewListeners() {
+    val listView = ListView(this)
+    // OnItemClickListener
+    listView.onItemClick { parent, view, position, id ->
+        print("onItemClick: position=$position")
+    }
+    // OnScrollListener
+    listView.onScrollChanged { view, scrollState ->
+        print("scroll state changed")
+    }
+}
+```
 
 #### View Utils
 ```kotlin
@@ -989,8 +1063,3 @@ fun asyncDelayFunctions() {
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
-
-
-
