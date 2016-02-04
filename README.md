@@ -1,12 +1,14 @@
 # Koi
 
-## A lightweight Kotlin library for Android (only ~160k)
+## A lightweight Kotlin library for Android
 
 ## Gradle
 
+Latest Version: [![Maven Central](https://img.shields.io/badge/2016.02.04-com.mcxiaoke.koi:core:0.4.0-brightgreen.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.mcxiaoke.koi%22)
+
 ```gradle
-    compile 'com.mcxiaoke.koi:core:0.3.+' // useful extensions (only ~90k)
-    compile 'com.mcxiaoke.koi:async:0.3.+' // async functions (only ~70k)
+compile 'com.mcxiaoke.koi:core:0.4.+' // useful extensions (only ~100k)
+compile 'com.mcxiaoke.koi:async:0.4.+' // async functions (only ~70k)
 ```
 
 ## Usage
