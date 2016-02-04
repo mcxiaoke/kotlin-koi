@@ -1,6 +1,6 @@
-# Koi
+# Koi - A lightweight Kotlin library for Android
 
-## A lightweight Kotlin library for Android
+**Koi** include many useful extensions and functions, they can help reducing the boilerplate code in Android applications. Specifically, **Koi** include a powerful extension function named [**asyncSafe**](#async-functions).
 
 ## Gradle
 
@@ -640,7 +640,7 @@ fun writeStringAndList() {
     val output = FileOutputStream("output.txt")
     output.doSafe {
         output.writeString("hello, world")
-        output.writeString("你好，世界", charset = Encoding.CHARSET_UTF_8)
+        output.writeString("Alic's Adventures in Wonderland", charset = Encoding.CHARSET_UTF_8)
 
         val list1 = listOf<Int>(1, 2, 3, 4, 5)
         val list2 = (1..8).map { "Item No.$it" }
