@@ -40,7 +40,7 @@ class CollectionExtensionSample {
     }
 
     fun appendAndPrepend() {
-        val numbers = (1..6).toArrayList()
+        val numbers = (1..6).toMutableList()
         println(numbers.joinToString()) // "1, 2, 3, 4, 5, 6, 7"
         numbers.head() // .dropLast(1)
         numbers.tail() //.drop(1)

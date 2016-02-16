@@ -15,7 +15,7 @@ class IOExtensionSample {
     fun closeableSample() {
         val input = FileInputStream(File("readme.txt"))
         try {
-            val string = input.readString("UTF-8")
+            val string = input.readString(Charsets.UTF_8)
         } catch(e: IOException) {
             e.printStackTrace()
         } finally {
@@ -28,7 +28,7 @@ class IOExtensionSample {
     fun doSafeSample() {
         val input = FileInputStream(File("readme.txt"))
         input.doSafe {
-            val string = readString("UTF-8")
+            val string = readString(Charsets.UTF_8)
         }
     }
 
@@ -37,13 +37,12 @@ class IOExtensionSample {
     fun readStringAndList1() {
         val input = FileInputStream(File("readme.txt"))
         try {
-            val reader = input.reader(Encoding.CHARSET_UTF_8)
+            val reader = input.reader(Charsets.UTF_8)
 
-            val string1 = input.readString(Encoding.UTF_8)
-            val string2 = input.readString(Encoding.CHARSET_UTF_8)
+            val string1 = input.readString(Charsets.UTF_8)
 
             val list1 = input.readList()
-            val list2 = input.readList(Encoding.CHARSET_UTF_8)
+            val list2 = input.readList(Charsets.UTF_8)
 
         } catch(e: IOException) {
 
@@ -57,13 +56,12 @@ class IOExtensionSample {
     fun readStringAndList2() {
         val input = FileInputStream(File("readme.txt"))
         input.doSafe {
-            val reader = reader(Encoding.CHARSET_UTF_8)
+            val reader = reader(Charsets.UTF_8)
 
-            val string1 = readString(Encoding.UTF_8)
-            val string2 = readString(Encoding.CHARSET_UTF_8)
+            val string1 = readString(Charsets.UTF_8)
 
             val list1 = readList()
-            val list2 = readList(Encoding.CHARSET_UTF_8)
+            val list2 = readList(Charsets.UTF_8)
         }
     }
 
@@ -71,11 +69,11 @@ class IOExtensionSample {
         val output = FileOutputStream("output.txt")
         output.doSafe {
             output.writeString("hello, world")
-            output.writeString("你好，世界", charset = Encoding.CHARSET_UTF_8)
+            output.writeString("你好，世界", charset = Charsets.UTF_8)
 
             val list1 = listOf<Int>(1, 2, 3, 4, 5)
             val list2 = (1..8).map { "Item No.$it" }
-            output.writeList(list1, charset = Encoding.CHARSET_UTF_8)
+            output.writeList(list1, charset = Charsets.UTF_8)
             output.writeList(list2)
         }
     }
@@ -85,13 +83,13 @@ class IOExtensionSample {
         val file = File("some.txt")
 
         val text1 = file.readText()
-        val text2 = file.readString(Encoding.CHARSET_UTF_8)
+        val text2 = file.readString(Charsets.UTF_8)
         val list1 = file.readList()
-        val list2 = file.readLines(Encoding.CHARSET_UTF_8)
+        val list2 = file.readLines(Charsets.UTF_8)
 
         file.writeText("hello, world")
         file.writeList(list1)
-        file.writeList(list2, Encoding.CHARSET_UTF_8)
+        file.writeList(list2, Charsets.UTF_8)
 
         val v1 = file.relativeToOrNull(directory)
         val v2 = file.toRelativeString(directory)
