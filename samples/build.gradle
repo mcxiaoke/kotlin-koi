@@ -12,17 +12,15 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 dependencies {
-    kapt 'com.jakewharton:butterknife:7.0.1'
+//    kapt 'com.jakewharton:butterknife:7.0.1'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    compile 'org.jetbrains.anko:anko-sdk15:0.8' // sdk19, sdk21, sdk23 are also available
-    compile 'org.jetbrains.anko:anko-support-v4:0.8' // In case you need support-v4 bindings
-    compile 'org.jetbrains.anko:anko-appcompat-v7:0.8' // For appcompat-v7 bindings
-    compile 'com.github.salomonbrys.kotson:kotson:1.7.0' //kotlin gson binding
-    compile 'io.reactivex:rxkotlin:0.30.1' // rx kotlin
+    compile 'org.jetbrains.anko:anko-sdk15:0.8.2' // sdk19, sdk21, sdk23 are also available
+    compile 'org.jetbrains.anko:anko-support-v4:0.8.2' // In case you need support-v4 bindings
+    compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.2' // For appcompat-v7 bindings
 
     compile "com.android.support:support-v4:$supportVersion"
     compile "com.android.support:recyclerview-v7:$supportVersion"
@@ -30,8 +28,8 @@ dependencies {
     compile "com.android.support:design:$supportVersion"
 
     compile 'com.google.code.gson:gson:2.5'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.squareup.okhttp:okhttp:2.7.2'
+//    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.okhttp:okhttp:2.7.4'
 
     compile 'com.mcxiaoke.next:task:1.3.0'
     compile 'com.mcxiaoke.next:core:1.3.0'
@@ -48,9 +46,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

@@ -26,7 +26,7 @@ private object Helper {
 
     fun getRawBytes(text: String): ByteArray {
         try {
-            return text.toByteArray(Encoding.UTF_8)
+            return text.toByteArray(Charsets.UTF_8)
         } catch (e: UnsupportedEncodingException) {
             return text.toByteArray()
         }
@@ -34,7 +34,7 @@ private object Helper {
 
     fun getString(data: ByteArray): String {
         try {
-            return String(data, Encoding.UTF_8)
+            return String(data, Charsets.UTF_8)
         } catch (e: UnsupportedEncodingException) {
             return String(data)
         }

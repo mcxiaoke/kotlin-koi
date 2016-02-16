@@ -45,13 +45,6 @@ fun Reader.readString(): String {
 }
 
 @Throws(IOException::class)
-fun InputStream.readString(encoding: String = Encoding.UTF_8): String {
-    var buffer = charArrayOf()
-    this.reader(encoding).read(buffer)
-    return String(buffer)
-}
-
-@Throws(IOException::class)
 @JvmOverloads fun InputStream.readString(charset: Charset = Charsets.UTF_8): String {
     var buffer = charArrayOf()
     this.reader(charset).read(buffer)

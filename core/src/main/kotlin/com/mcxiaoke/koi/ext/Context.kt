@@ -51,16 +51,6 @@ inline fun <reified T : View> Activity.find(id: Int): T = this.findViewById(id) 
 
 inline fun <reified T : View> Fragment.find(id: Int): T = this.view.findViewById(id) as T
 
-fun <T : View> android.support.v4.app.Fragment.find(id: Int): T = this.view.findViewById(id) as T
-
-fun <T : View> View.findView(id: Int): T = this.findViewById(id) as T
-
-fun <T : View> Activity.findView(id: Int): T = this.findViewById(id) as T
-
-fun <T : View> Fragment.findView(id: Int): T = this.view.findViewById(id) as T
-
-fun <T : View> android.support.v4.app.Fragment.findView(id: Int): T = this.view.findViewById(id) as T
-
 private fun inflateView(context: Context, layoutResId: Int, parent: ViewGroup?,
                         attachToRoot: Boolean): View =
         LayoutInflater.from(context).inflate(layoutResId, parent, attachToRoot)
@@ -82,7 +72,7 @@ fun Context.hasCamera(): Boolean {
 
 fun Context.mediaScan(uri: Uri) {
     val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-    intent.setData(uri)
+    intent.data = uri
     this.sendBroadcast(intent)
 }
 

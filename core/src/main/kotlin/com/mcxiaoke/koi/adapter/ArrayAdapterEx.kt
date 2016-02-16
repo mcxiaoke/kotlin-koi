@@ -46,11 +46,11 @@ abstract class ArrayAdapterEx<T>(
     }
 
     constructor(context: Context, objects: Array<T>)
-    : this(context, objects.toArrayList()) {
+    : this(context, objects.toMutableList()) {
     }
 
     constructor(context: Context, objects: Collection<T>)
-    : this(context, objects.toArrayList()) {
+    : this(context, objects.toMutableList()) {
     }
 
     fun addAll(items: Collection<T>): ArrayAdapterEx<T> {
