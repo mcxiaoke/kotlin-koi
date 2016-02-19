@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import java.util.*
+import java.util.Comparator
 
 /**
  * 从系统源码复制出来，精简了一些无用的方法，添加了一些实用的方法
@@ -36,6 +36,8 @@ abstract class ArrayAdapterEx<T>(
     protected val inflater: LayoutInflater
     protected val resources: Resources
 
+    var notifyChange = true
+
     init {
         inflater = LayoutInflater.from(context)
         resources = context.resources
@@ -57,7 +59,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.addAll(items)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -65,7 +69,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.addAll(index, collection)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -74,7 +80,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             result = objects.removeAll(items)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return result
     }
 
@@ -82,7 +90,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.clear()
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -90,7 +100,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.sortWith(comparator)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -103,7 +115,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.add(newItem)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -111,7 +125,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.add(index, newItem)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -119,7 +135,9 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.set(index, newItem)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
         return this
     }
 
@@ -139,14 +157,18 @@ abstract class ArrayAdapterEx<T>(
         synchronized (lock) {
             objects.remove(newItem)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
     }
 
     fun removeAt(index: Int) {
         synchronized (lock) {
             objects.removeAt(index)
         }
-        notifyDataSetChanged()
+        if (notifyChange) {
+            notifyDataSetChanged()
+        }
     }
 
     fun getPosition(item: T): Int {
