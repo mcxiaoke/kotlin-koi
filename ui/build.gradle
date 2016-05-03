@@ -1,5 +1,5 @@
 apply from: '../base.gradle'
-//apply from: 'https://github.com/mcxiaoke/gradle-mvn-push/raw/master/gradle-mvn-push.gradle'
+//apply from: 'https://coding.net/u/mcxiaoke/p/gradle-mvn-push/git/raw/master/gradle-mvn-push.gradle'
 
 
 //dependencies {
