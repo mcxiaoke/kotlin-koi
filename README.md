@@ -74,6 +74,7 @@ compile 'com.mcxiaoke.koi:async:0.5.1' // async functions (only ~70k)
     * [With Context Check 2](#with-context-check-2)
     * [Without Context Check](#without-context-check)
     * [With Delay](#with-delay)
+    * [Custom Executor](#custom-executor)
 
 <!-- toc stop -->
 
@@ -998,6 +999,17 @@ fun asyncUnsafeFunctions() {
         }
     }
 }
+```
+
+#### Custom Executor
+```kotlin
+    val executor = Executors.newFixedThreadPool(4)
+    asyncSafe(executor) {
+        print("action executed in async thread")
+        mainThreadSafe {
+            print("code here executed in main thread")
+        }
+    }
 ```
 
 #### With Delay

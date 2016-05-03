@@ -1,7 +1,7 @@
 package com.mcxiaoke.koi.samples
 
 import com.mcxiaoke.koi.async.*
-import org.jetbrains.anko.async
+import java.util.concurrent.Executors
 
 /**
  * Author: mcxiaoke
@@ -82,6 +82,16 @@ class AsyncFunctionsSample {
                     // if action failed with exception
                     print("failure callback in main thread, error:$error")
                 })
+    }
+
+    fun asyncSafeFunction4() {
+        val executor = Executors.newFixedThreadPool(4)
+        asyncSafe(executor) {
+            print("action executed in async thread")
+            mainThreadSafe {
+                print("code here executed in main thread")
+            }
+        }
     }
 
 
