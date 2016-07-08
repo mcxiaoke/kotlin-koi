@@ -6,7 +6,7 @@ ext {
 }
 
 buildscript {
-    ext.kotlinVersion = '1.0.2'
+    ext.kotlinVersion = '1.0.3'
     ext.supportVersion = '22.2.1'
 
     repositories {
