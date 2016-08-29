@@ -28,9 +28,19 @@ class HandlerExtensionSample {
         // equal to
         handler.postAtTime({ print("perform action after 5s") }, 5000)
 
-        handler.delayed(3000, { print("perform action after 5s") })
+        handler.delayed(3000, { print("perform action after 3s") })
         // equal to
-        handler.postDelayed({ print("perform action after 5s") }, 3000)
+        handler.postDelayed({ print("perform action after 3s") }, 3000)
 
+        // repeating actions
+        handler.repeat(3000) { print("perform action indefinitely every 3s") }
+
+        handler.repeat(
+                delayMillis = 1000,
+                startDelayMillis = 3000,
+                repeatCount = 5
+        ) {
+            print("perform action 5 times every 3s starting 1s after initial call")
+        }
     }
 }
