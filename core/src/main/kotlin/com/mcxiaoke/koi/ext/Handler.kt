@@ -32,6 +32,8 @@ inline fun <T : Any> Handler.repeat(delayMillis: Long, startDelayMillis: Long = 
     }, startDelay)
 }
 
+fun Handler.cancelAll() = removeCallbacksAndMessages(null)
+
 fun handler(handleMessage: (Message) -> Boolean): Handler {
     return Handler { p -> if (p == null) false else handleMessage(p) }
 }

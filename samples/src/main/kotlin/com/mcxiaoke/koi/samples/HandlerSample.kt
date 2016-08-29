@@ -42,5 +42,8 @@ class HandlerExtensionSample {
         ) {
             print("perform action 5 times every 3s starting 1s after initial call")
         }
+
+        // cancels all pending messages and callbacks
+        handler.cancelAll()
     }
 }
