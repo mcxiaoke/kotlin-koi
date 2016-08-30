@@ -21,15 +21,15 @@ inline fun <T : Any> Handler.delayed(delayMillis: Long, crossinline action: () -
         = postDelayed({ action() }, delayMillis)
 
 inline fun <T : Any> Handler.repeat(delayMillis: Long, startDelayMillis: Long = 0, repeatCount: Int = 0, crossinline action: (Int) -> T) {
-    val startDelay = if (startDelayMillis < 0) 0 else startDelayMillis
-    val repeats = if (repeatCount < 0) 0 else repeatCount
+    if (startDelayMillis < 0) throw IllegalArgumentException("Start delay must be a positive Int or 0")
+    if (repeatCount < 0) throw IllegalArgumentException("Repeat count must be a positive Int or 0")
     var counter = 0
     postDelayed(object : Runnable {
         override fun run() {
             action(counter ++)
-            if (repeats == 0 || counter < repeats) postDelayed(this, delayMillis)
+            if (repeatCount == 0 || counter < repeatCount) postDelayed(this, delayMillis)
         }
-    }, startDelay)
+    }, startDelayMillis)
 }
 
 fun Handler.cancelAll() = removeCallbacksAndMessages(null)
