@@ -24,7 +24,14 @@ fun Context.isAppInstalled(packageName: String): Boolean {
     } catch (e: PackageManager.NameNotFoundException) {
         return false
     }
+}
 
+fun Context.isAppEnabled(packageName: String): Boolean {
+    return try {
+        packageManager.getApplicationInfo(packageName, 0)?.enabled ?: false
+    } catch (e: PackageManager.NameNotFoundException) {
+        false
+    }
 }
 
 fun Context.isMainProcess(): Boolean {
@@ -122,4 +129,3 @@ fun Context.dumpSignature(): String {
     }
     return builder.toString()
 }
-
