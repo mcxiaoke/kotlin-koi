@@ -4,11 +4,11 @@
 
 ## Gradle
 
-Latest Version: [![Maven Central](https://img.shields.io/badge/2016.05.17-com.mcxiaoke.koi:core:0.5.2-brightgreen.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.mcxiaoke.koi%22) Compiled with Kotlin 1.0.2.
+Latest Version: [![Maven Central](https://img.shields.io/badge/2017.02.16-com.mcxiaoke.koi:core:0.5.4-brightgreen.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.mcxiaoke.koi%22) Compiled with Kotlin 1.0.6.
 
 ```gradle
-compile 'com.mcxiaoke.koi:core:0.5.3' // useful extensions (only ~100k)
-compile 'com.mcxiaoke.koi:async:0.5.3' // async functions (only ~70k)
+compile 'com.mcxiaoke.koi:core:0.5.4' // useful extensions (only ~100k)
+compile 'com.mcxiaoke.koi:async:0.5.4' // async functions (only ~70k)
 ```
 
 ## Usage
