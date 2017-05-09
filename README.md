@@ -808,7 +808,7 @@ fun preconditions() {
 }
 ```
 
-###Thread Functions
+### Thread Functions
 
 #### Create Thread Pool
 ```kotlin
