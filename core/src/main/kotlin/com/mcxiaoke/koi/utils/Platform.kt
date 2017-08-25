@@ -8,8 +8,11 @@ import android.os.Build
  * Time: 17:45
  */
 
+fun beforeOreo(): Boolean = isOlderVersionThen(26)
+fun oreoOrNewer(): Boolean = isOnVersionOrNewer(26)
+fun beforeNougat(): Boolean = isOlderVersionThen(24)
+fun nougatOrNewer(): Boolean = isOnVersionOrNewer(24)
 fun beforeMarshmallow(): Boolean = isOlderVersionThen(23)
-
 fun marshmallowOrNewer(): Boolean = isOnVersionOrNewer(23)
 fun beforeLollipop(): Boolean = isOlderVersionThen(21)
 fun lollipopOrNewer(): Boolean = isOnVersionOrNewer(21)
