@@ -61,9 +61,9 @@ fun String.toSafeFileName(): String {
     val size = this.length
     val builder = StringBuilder(size * 2)
     forEachIndexed { i, c ->
-        var valid = c >= 'a' && c <= 'z'
-        valid = valid || c >= 'A' && c <= 'Z'
-        valid = valid || c >= '0' && c <= '9'
+        var valid = c in 'a'..'z'
+        valid = valid || c in 'A'..'Z'
+        valid = valid || c in '0'..'9'
         valid = valid || c == '_' || c == '-' || c == '.'
 
         if (valid) {
@@ -78,8 +78,8 @@ fun String.toSafeFileName(): String {
 }
 
 fun String.toQueries(): Map<String, String> {
-    var map: Map<String, String> = mapOf()
-    if (this.length == 0) {
+    val map: Map<String, String> = mapOf()
+    if (this.isEmpty()) {
         return map
     }
     try {
@@ -109,7 +109,7 @@ fun String.toQueries(): Map<String, String> {
         if (trimTokens) {
             token = token.trim { it <= ' ' }
         }
-        if (!ignoreEmptyTokens || token.length > 0) {
+        if (!ignoreEmptyTokens || token.isNotEmpty()) {
             tokens.add(token)
         }
     }
@@ -128,7 +128,7 @@ fun String.trimLeadingCharacter(leadingCharacter: Char): String {
         return this
     }
     val sb = StringBuilder(this)
-    while (sb.length > 0 && sb[0] == leadingCharacter) {
+    while (sb.isNotEmpty() && sb[0] == leadingCharacter) {
         sb.deleteCharAt(0)
     }
     return sb.toString()
@@ -139,7 +139,7 @@ fun String.trimTrailingCharacter(trailingCharacter: Char): String {
         return this
     }
     val sb = StringBuilder(this)
-    while (sb.length > 0 && sb[sb.length - 1] == trailingCharacter) {
+    while (sb.isNotEmpty() && sb[sb.length - 1] == trailingCharacter) {
         sb.deleteCharAt(sb.length - 1)
     }
     return sb.toString()

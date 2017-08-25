@@ -33,27 +33,19 @@ abstract class ArrayAdapterEx<T>(
 : BaseAdapter() {
 
     private val lock = Object()
-    protected val inflater: LayoutInflater
-    protected val resources: Resources
+    protected val inflater: LayoutInflater = LayoutInflater.from(context)
+    protected val resources: Resources = context.resources
 
     var notifyChange = true
 
-    init {
-        inflater = LayoutInflater.from(context)
-        resources = context.resources
-    }
-
     constructor(context: Context)
-    : this(context, arrayListOf<T>()) {
-    }
+    : this(context, arrayListOf<T>())
 
     constructor(context: Context, objects: Array<T>)
-    : this(context, objects.toMutableList()) {
-    }
+    : this(context, objects.toMutableList())
 
     constructor(context: Context, objects: Collection<T>)
-    : this(context, objects.toMutableList()) {
-    }
+    : this(context, objects.toMutableList())
 
     fun addAll(items: Collection<T>): ArrayAdapterEx<T> {
         synchronized (lock) {

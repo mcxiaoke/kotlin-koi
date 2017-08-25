@@ -10,7 +10,7 @@ import android.view.ViewGroup
  * Time: 18:48
  */
 
-class QuickAdapter<T>(
+open class QuickAdapter<T>(
         ctx: Context,
         protected val layoutId: Int,
         protected val bind: (QuickViewBinder, T) -> Unit)

@@ -39,21 +39,21 @@ fun URLConnection.close() {
 
 @Throws(IOException::class)
 fun Reader.readString(): String {
-    var buffer = charArrayOf()
+    val buffer = charArrayOf()
     this.read(buffer)
     return String(buffer)
 }
 
 @Throws(IOException::class)
 @JvmOverloads fun InputStream.readString(charset: Charset = Charsets.UTF_8): String {
-    var buffer = charArrayOf()
+    val buffer = charArrayOf()
     this.reader(charset).read(buffer)
     return String(buffer)
 }
 
 @Throws(IOException::class)
 @JvmOverloads fun File.readString(charset: Charset = Charsets.UTF_8): String {
-    var input = FileInputStream(this)
+    val input = FileInputStream(this)
     return input.readString(charset)
 }
 

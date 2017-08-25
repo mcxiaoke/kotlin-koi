@@ -19,7 +19,7 @@ interface Detachable {
 }
 
 class WeakContext<T>(val weakRef: WeakReference<T>) {
-    protected val needCheck: Boolean
+    private val needCheck: Boolean
 
     init {
         val ctx = weakRef.get()
@@ -34,7 +34,7 @@ class WeakContext<T>(val weakRef: WeakReference<T>) {
 
     fun sleep(time: Long) = Thread.sleep(time)
 
-    fun getCtx(): T = weakRef.get()
+    fun getCtx(): T? = weakRef.get()
 
     fun isContextAlive(): Boolean {
         val context = weakRef.get() ?: return false

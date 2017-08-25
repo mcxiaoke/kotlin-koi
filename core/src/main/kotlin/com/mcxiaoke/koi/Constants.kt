@@ -18,12 +18,12 @@ object Encoding {
     const val UTF_16BE = "UTF-16BE"
     const val UTF_16LE = "UTF-16LE"
     const val UTF_8 = "UTF-8"
-    val CHARSET_ISO_8859_1 = Charset.forName(ISO_8859_1)
-    val CHARSET_US_ASCII = Charset.forName(US_ASCII)
-    val CHARSET_UTF_16 = Charset.forName(UTF_16)
-    val CHARSET_UTF_16BE = Charset.forName(UTF_16BE)
-    val CHARSET_UTF_16LE = Charset.forName(UTF_16LE)
-    val CHARSET_UTF_8 = Charset.forName(UTF_8)
+    val CHARSET_ISO_8859_1: Charset = Charset.forName(ISO_8859_1)
+    val CHARSET_US_ASCII: Charset = Charset.forName(US_ASCII)
+    val CHARSET_UTF_16: Charset = Charset.forName(UTF_16)
+    val CHARSET_UTF_16BE: Charset = Charset.forName(UTF_16BE)
+    val CHARSET_UTF_16LE: Charset = Charset.forName(UTF_16LE)
+    val CHARSET_UTF_8: Charset = Charset.forName(UTF_8)
 }
 
 object Const {
@@ -33,5 +33,5 @@ object Const {
     const val FILE_EXTENSION_SEPARATOR = "."
     const val RESERVED_CHARS = "|\\?*<\":>+[]/'"
     @JvmField val HEX_DIGITS = "0123456789ABCDEF".toCharArray()
-    @JvmField val SAFE_FILENAME_PATTERN = Pattern.compile("[\\w%+,./=_-]+")
+    @JvmField val SAFE_FILENAME_PATTERN: Pattern = Pattern.compile("[\\w%+,./=_-]+")
 }

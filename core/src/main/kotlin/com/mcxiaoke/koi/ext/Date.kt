@@ -27,7 +27,7 @@ fun dateParse(s: String): Date = DateHelper.DF_SIMPLE_FORMAT.get().parse(s, Pars
 
 fun Date.asString(format: DateFormat): String = format.format(this)
 
-fun Date.asString(format: String): String = asString(SimpleDateFormat(format))
+fun Date.asString(format: String): String = asString(SimpleDateFormat(format, Locale.US))
 
 fun Date.asString(): String = DateHelper.DF_SIMPLE_FORMAT.get().format(this)
 

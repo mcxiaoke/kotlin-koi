@@ -10,11 +10,7 @@ import java.util.concurrent.*
 
 class CounterThreadFactory(name: String?) : ThreadFactory {
     private var count: Int = 0
-    private val name: String
-
-    init {
-        this.name = name ?: "koi"
-    }
+    private val name: String = name ?: "koi"
 
     override fun newThread(r: Runnable): Thread {
         val thread = Thread(r)

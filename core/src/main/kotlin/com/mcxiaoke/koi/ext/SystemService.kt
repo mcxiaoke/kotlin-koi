@@ -7,6 +7,7 @@ package com.mcxiaoke.koi.ext
  */
 
 import android.accounts.AccountManager
+import android.annotation.TargetApi
 import android.app.*
 import android.app.admin.DevicePolicyManager
 import android.app.job.JobScheduler
@@ -58,24 +59,30 @@ fun Context.getActivityManager(): ActivityManager =
 fun Context.getAlarmManager(): AlarmManager =
         getSystemServiceAs(Context.ALARM_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getAppWidgetManager(): AppWidgetManager =
         getSystemServiceAs(Context.APPWIDGET_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 fun Context.getAppOpsManager(): AppOpsManager =
         getSystemServiceAs(Context.APP_OPS_SERVICE)
 
 fun Context.getAudioManager(): AudioManager =
         getSystemServiceAs(Context.AUDIO_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getBatteryManager(): BatteryManager =
         getSystemServiceAs(Context.BATTERY_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 fun Context.getBluetoothAdapter(): BluetoothAdapter =
         getSystemServiceAs(Context.BLUETOOTH_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getCameraManager(): CameraManager =
         getSystemServiceAs(Context.CAMERA_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 fun Context.getCaptioningManager(): CaptioningManager =
         getSystemServiceAs(Context.CAPTIONING_SERVICE)
 
@@ -85,12 +92,14 @@ fun Context.getClipboardManager(): ClipboardManager =
 fun Context.getConnectivityManager(): ConnectivityManager =
         getSystemServiceAs(Context.CONNECTIVITY_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 fun Context.getConsumerIrManager(): ConsumerIrManager =
         getSystemServiceAs(Context.CONSUMER_IR_SERVICE)
 
 fun Context.getDevicePolicyManager(): DevicePolicyManager =
         getSystemServiceAs(Context.DEVICE_POLICY_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 fun Context.getDisplayManager(): DisplayManager =
         getSystemServiceAs(Context.DISPLAY_SERVICE)
 
@@ -103,15 +112,18 @@ fun Context.getDropBoxManager(): DropBoxManager =
 fun Context.getInputMethodManager(): InputMethodManager =
         getSystemServiceAs(Context.INPUT_METHOD_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 fun Context.getInputManager(): InputManager =
         getSystemServiceAs(Context.INPUT_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getJobScheduler(): JobScheduler =
         getSystemServiceAs(Context.JOB_SCHEDULER_SERVICE)
 
 fun Context.getKeyguardManager(): KeyguardManager =
         getSystemServiceAs(Context.KEYGUARD_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getLauncherApps(): LauncherApps =
         getSystemServiceAs(Context.LAUNCHER_APPS_SERVICE)
 
@@ -121,12 +133,15 @@ fun Context.getLayoutService(): LayoutInflater =
 fun Context.getLocationManager(): LocationManager =
         getSystemServiceAs(Context.LOCATION_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getMediaProjectionManager(): MediaProjectionManager =
         getSystemServiceAs(Context.MEDIA_PROJECTION_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 fun Context.getMediaRouter(): MediaRouter =
         getSystemServiceAs(Context.MEDIA_ROUTER_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getMediaSessionManager(): MediaSessionManager =
         getSystemServiceAs(Context.MEDIA_SESSION_SERVICE)
 
@@ -136,15 +151,18 @@ fun Context.getNfcManager(): NfcManager =
 fun Context.getNotificationManager(): NotificationManager =
         getSystemServiceAs(Context.NOTIFICATION_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 fun Context.getNsdManager(): NsdManager =
         getSystemServiceAs(Context.NSD_SERVICE)
 
 fun Context.getPowerManager(): PowerManager =
         getSystemServiceAs(Context.POWER_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 fun Context.getPrintManager(): PrintManager =
         getSystemServiceAs(Context.PRINT_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getRestrictionsManager(): RestrictionsManager =
         getSystemServiceAs(Context.RESTRICTIONS_SERVICE)
 
@@ -163,6 +181,7 @@ fun Context.getTelephonyManager(): TelephonyManager =
 fun Context.getTextServicesManager(): TextServicesManager =
         getSystemServiceAs(Context.TEXT_SERVICES_MANAGER_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 fun Context.getTvInputManager(): TvInputManager =
         getSystemServiceAs(Context.TV_INPUT_SERVICE)
 
@@ -172,6 +191,7 @@ fun Context.getUiModeManager(): UiModeManager =
 fun Context.getUsbManager(): UsbManager =
         getSystemServiceAs(Context.USB_SERVICE)
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 fun Context.getUserManager(): UserManager =
         getSystemServiceAs(Context.USER_SERVICE)
 

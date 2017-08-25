@@ -51,9 +51,7 @@ inline fun <T, R : MutableCollection<T>> Cursor?.mapTo(result: R, transform: Cur
 }
 
 inline fun <T> Cursor?.mapAndClose(transform: Cursor.() -> T): MutableCollection<T> {
-    try {
+    this.use {
         return map(transform)
-    } finally {
-        this?.close()
     }
 }

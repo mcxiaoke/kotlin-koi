@@ -19,7 +19,7 @@ inline fun <reified T : Context> Context.newIntent(): Intent =
 
 inline fun <reified T : Context> Context.newIntent(flags: Int): Intent {
     val intent = newIntent<T>()
-    intent.setFlags(flags)
+    intent.flags = flags
     return intent
 }
 

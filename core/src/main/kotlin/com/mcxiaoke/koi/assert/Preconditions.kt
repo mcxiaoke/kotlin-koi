@@ -14,13 +14,13 @@ fun <T : Any> throwIfNull(obj: T?, message: String? = "object is null") {
 }
 
 fun throwIfEmpty(obj: String?, message: String? = "string is null or empty") {
-    if (obj == null || obj.length == 0) {
+    if (obj == null || obj.isEmpty()) {
         throw IllegalArgumentException(message)
     }
 }
 
 fun <T : Any> throwIfEmpty(obj: Collection<T>?, message: String? = "collection is null or empty") {
-    if (obj == null || obj.size == 0) {
+    if (obj == null || obj.isEmpty()) {
         throw IllegalArgumentException(message)
     }
 }
